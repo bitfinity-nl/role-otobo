@@ -47,7 +47,7 @@ sub Load {
 
     # The password of database user. You also can use bin/otobo.Console.pl Maint::Database::PasswordCrypt
     # for crypted passwords
-    $Self->{DatabasePw} = '{{ otovo_db_pass }}';
+    $Self->{DatabasePw} = '{{ otobo_db_pass }}';
 
     # The database DSN for MySQL ==> more: "perldoc DBD::mysql"
     $Self->{DatabaseDSN} = "DBI:mysql:database=$Self->{Database};host=$Self->{DatabaseHost};";
