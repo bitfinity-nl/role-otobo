@@ -88,16 +88,16 @@
 #    dest: /opt/otrs
 #    state: link
 
-#- name: "Create local group otrs for service account otrs user(s)"
-#  group:
-#    name: otrs
-#    state: present
+- name: "Create local group otrs for service account otrs user(s)"
+  group:
+    name: otrs
+    state: present
 
 - name: "Create local service account otrs and to security group otrs, www-data"
   user:
-    name: otrs
-    home: /opt/otrs
-    group: otrs
+    name: otobo
+    home: /opt/otobo
+    group: otobo
     groups: www-data
     system: yes
 
