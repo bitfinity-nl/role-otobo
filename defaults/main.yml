@@ -1,19 +1,27 @@
-
+---
+# Title: OTOBO Ticket system
+#
+# Authtor: bitfinity-nl
+# File: defaults/main.yml
+#
+# Description:
+#   OTOBO is the new free Open Source ticket system 
+#   with strong functionality AND a great look.
 
 
 # -- OTRS settings --
 #
 # Variable(s):
-#   otrs_version      : 'otrs-6.0.19'                                            # Version of OTRS
-#   otrs_download_url : 'https://ftp.otrs.org/pub/otrs/{{ otrs_version }}.zip'   # Url where to download the resources.
-#   otrs_dest         : '/opt/otrs-workingdir/releases/{{ otrs_version }}/       # Destination to unarchive the resources.
-#   otrs_backups      : '/opt/otrs-workingdir/backups/'                          # Where to place the OTRS backups
+#   otobo_version      : 'otrs-6.0.19'                                            # Version of OTOBO
+#   otobo_download_url : 'https://ftp.otrs.org/pub/otrs/{{ otrs_version }}.zip'   # Url where to download the resources.
+#   otobo_dest         : '/opt/otrs-workingdir/releases/{{ otrs_version }}/       # Destination to unarchive the resources.
+#   otobo_backups      : '/opt/otrs-workingdir/backups/'                          # Where to place the OTRS backups
 #
-otrs_version      : 'otrs-6.0.24'
-otrs_download_url : 'https://ftp.otrs.org/pub/otrs/{{ otrs_version }}.zip'
-otrs_dest         : '/opt/otrs-workingdir/releases/'
-otrs_backups      : '/opt/otrs-workingdir/backups/'
+otobo_version      : 'otobo-latest-10.0'
+otobo_download_url : 'https://ftp.otobo.org/pub/otobo/{{ otobo_version }}.tar.gz'
+otobo_dest         : '/opt/otobo-workingdir/releases/'
+otobo_backups      : '/opt/otobo-workingdir/backups/'
 
 
 
-https://ftp.otobo.org/pub/otobo/otobo-latest-10.0.tar.gz
+
