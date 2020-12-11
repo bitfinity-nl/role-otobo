@@ -68,7 +68,6 @@
     path: "{{ item }}"
     state: directory
   with_items:
-    - "/opt/otobo"
     - "{{ otobo_dest }}"
 #    - "{{ otobo_backups }}"
 
