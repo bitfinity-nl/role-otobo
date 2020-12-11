@@ -59,7 +59,7 @@
     - /opt/otobo/scripts/database/otobo-schema.mysql.sql
     - /opt/otobo/scripts/database/otobo-initial_insert.mysql.sql
     - /opt/otobo/scripts/database/otobo-schema-post.mysql.sql
-  when: otrs_db_state.changed == true
+  when: otobo_db_state.changed == true
   notify:
     - restart_mariadb
     - restart_apache2
