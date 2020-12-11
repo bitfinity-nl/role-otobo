@@ -36,5 +36,23 @@ otobo_sys_user : '{{ def_mariadb_user }}'
 otobo_sys_pass : '{{ def_mariadb_pass }}'
 otobo_db_name  : 'otobo' 
 otobo_db_user  : 'otobo'
-otovo_db_pass  : 'password'
+otobo_db_pass  : 'password'
 
+
+# -- MariaDB Database settings --
+#
+# File: my.cnf.j2 --> my-otrs.cnf
+#
+# Variable(s):
+#   otobo_my_max_allowed_packet   : '64M'
+#   otobo_my_query_cache_size     : '36M'
+#   otobo_my_innodb_log_file_size : '256M'
+#   otobo_my_character_set_server : 'utf8'
+#
+# Comment:
+#   See MariaDB documentation for more information.
+#
+otobo_my_max_allowed_packet   : '64M'
+otobo_my_query_cache_size     : '36M'
+otobo_my_innodb_log_file_size : '256M'
+otobo_my_character_set_server : 'utf8'
