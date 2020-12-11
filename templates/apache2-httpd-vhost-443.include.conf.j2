@@ -28,14 +28,14 @@
         SSLEngine on
 
         # Please add the path to the ssl cert
-        SSLCertificateFile /etc/ssl/certs/otobo.de.cert
+        SSLCertificateFile {{ otobo_SSLCertificateFile }}
 
         # Please add the path to the ssl key
-        SSLCertificateKeyFile /etc/ssl/private/otobo.de.nopass.key
+        SSLCertificateKeyFile {{ otobo_SSLCertificateKeyFile }}
 
         # Please add the path to the ssl chain file (Download from used ssl cert publisher)
-        SSLCertificateChainFile /etc/ssl/certs/linux_intermediate_otobo.ch.pem
-
+        SSLCertificateChainFile {{ otobo_SSLCertificateChainFile }}
+        
     </IfModule>
 
     <IfModule mod_perl.c>
