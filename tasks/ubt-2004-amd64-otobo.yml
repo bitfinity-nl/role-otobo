@@ -102,8 +102,8 @@
     groups: www-data
     system: yes
 
-#- name: "Check Perl modules"
-#  command: /opt/otrs/bin/otrs.CheckModules.pl
+- name: "Check Perl modules"
+  command: /opt/otobo/bin/otobo.CheckModules.pl -list
 
 #- name: "Transfer configuration template"
 #  template:
