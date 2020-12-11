@@ -140,14 +140,18 @@
     rule: allow
     name: Apache
 
-#- name: "Copy /opt/otrs/var/cron/otrs_daemon.dist to /opt/otrs/var/cron/otrs_daemon"
-#  copy:
-#    src: /opt/otrs/var/cron/otrs_daemon.dist
-#    dest: /opt/otrs/var/cron/otrs_daemon
-#    remote_src: yes
-
+- name: "Copy /opt/otrs/var/cron/otrs_daemon.dist to /opt/otrs/var/cron/otrs_daemon (WIP)"
+  copy:
+    src: /opt/otobo/scripts/database/otobo_daemon.dist
+    dest: /opt/otrs/var/cron/otrs_daemon
+    remote_src: yes
+  with_items:
+    - { src: '/opt/otobo/scripts/database/otobo_daemon.dist', dest: '/opt/otobo/scripts/database/otobo_daemon'}
+    - { src: '/opt/otobo/scripts/database/aaa_base.dist', dest: '/opt/otobo/scripts/database/aaa_base'}
+    
 - name: "Start Deamons & Cron"
   raw: "{{ item }}"
   with_items:
+    - /opt/otobo/bin/Cron.sh
     -  sudo su - otobo -c "/opt/otobo/bin/otobo.Daemon.pl start"
 #    -  sudo su - otrs -c "/opt/otrs/bin/Cron.sh start"
