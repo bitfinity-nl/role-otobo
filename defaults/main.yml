@@ -23,5 +23,18 @@ otobo_dest         : '/opt/otobo/'
 otobo_backups      : '/opt/otobo-workingdir/backups/'
 
 
-
+# -- MySQL User settings --
+#
+# Variable(s):
+#   otobo_sys_user : 'root'      # Administrative User.
+#   otobo_sys_pass : 'password'  # Administrative password.
+#   otobo_db_name  : 'otobo'     # Database name. 
+#   otobo_db_user  : 'otobo'     # Database user.
+#   otobo_db_pass  : 'password'  # Database password.
+#   
+otobo_sys_user : '{{ def_mariadb_user }}'
+otobo_sys_pass : '{{ def_mariadb_pass }}'
+otobo_db_name  : 'otobo' 
+otobo_db_user  : 'otobo'
+otovo_db_pass  : 'password'
 
