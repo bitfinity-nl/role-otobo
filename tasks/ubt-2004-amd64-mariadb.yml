@@ -16,7 +16,7 @@
     group: root
     mode: 0644
   with_items:
-    - { src: 'mysql/my.cnf.j2', dest: '/etc/mysql/my.cnf'}
+    - { src: 'my.cnf.j2', dest: '/etc/mysql/my.cnf'}
   notify: restart_mysql
 
 #- name: "Workaround to load custom settings my.cnf at the end"
