@@ -105,8 +105,9 @@
   with_items:
     - { src: 'Config.pm.dist.j2', dest: '/opt/otobo/Kernel/Config.pm' }
 
-#- name: "Set OTRS file permissions"
-#  shell: /opt/otrs/bin/otrs.SetPermissions.pl --web-group=www-data
+- name: "Set OTRS file permissions"
+#  shell: /opt/otobo/bin/otobo.SetPermissions.pl --web-group=www-data
+  shell: /opt/otobo/bin/otobo.SetPermissions.pl
 
 #- name: "Create symlink from {{ otrs_dest }} to /opt/otrs"
 #  file:
