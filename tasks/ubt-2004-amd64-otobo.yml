@@ -80,6 +80,7 @@
   unarchive: 
     src: "{{ otobo_download_url }}"
     dest: "{{ otobo_dest }}"
+    extra_opts: [--strip-components=1]
     remote_src: yes
 
 #- name: "Create symlink from {{ otrs_dest }} to /opt/otrs"
