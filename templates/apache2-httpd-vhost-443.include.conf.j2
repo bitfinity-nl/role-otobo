@@ -10,10 +10,10 @@
     ServerAdmin {{ otobo_email }}
 
     # Please change here the FQDN or hostname, you like to use with OTOBO
-    ServerName {{ otobo_fqdn }}
+    ServerName {{ otobo_ServerName }}
 
     # Please change here and add more different FQDNÂ´s or hostnames, you like to use with OTOBO
-    ServerAlias www.helpdesk.otobo.de
+    ServerAlias {{ otobo_ServerAlias }}
 
     DocumentRoot /opt/otobo/var/httpd/htdocs
     HostnameLookups Off
