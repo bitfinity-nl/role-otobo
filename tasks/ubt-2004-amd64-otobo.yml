@@ -110,7 +110,7 @@
     src: "{{ item.src }}" 
     dest: "{{ item.dest }}"
   with_items:
-    - { src: 'otrs-ce/Kernel/Config.pm.j2', dest: '/opt/otobo/Kernel/Config.pm' }
+    - { src: 'Config.pm.dist.j2', dest: '/opt/otobo/Kernel/Config.pm' }
 
 #- name: "Set OTRS file permissions"
 #  shell: /opt/otrs/bin/otrs.SetPermissions.pl --web-group=www-data
