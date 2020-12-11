@@ -13,7 +13,7 @@
     state: restarted
     name: apache2
 
-- name: restart_mysql
+- name: restart_mariadb
   systemd:
     state: restarted
-    name: mysql
+    name: mariadb
