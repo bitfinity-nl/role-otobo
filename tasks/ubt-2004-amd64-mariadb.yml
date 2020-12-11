@@ -17,7 +17,7 @@
     mode: 0644
   with_items:
     - { src: 'my.cnf.j2', dest: '/etc/mysql/my.cnf'}
-  notify: restart_mysql
+  notify: restart_mariadb
 
 #- name: "Workaround to load custom settings my.cnf at the end"
 #  file:
@@ -61,5 +61,5 @@
     - /opt/otobo/scripts/database/otobo-schema-post.mysql.sql
   when: otrs_db_state.changed == true
   notify:
-    - restart_mysql
+    - restart_mariadb
     - restart_apache2
