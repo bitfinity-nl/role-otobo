@@ -128,7 +128,7 @@
   notify: restart_apache2
 
 - name: "Enable zzz_otobo-80.conf and zzz_otobo-443.conf"
-  command: a2ensite rundeck.conf
+  command: "a2ensite {{ items }}"
   with_items:
     - zzz_otobo-80.conf
     - zzz_otobo-443.conf
@@ -146,8 +146,8 @@
 #    dest: /opt/otrs/var/cron/otrs_daemon
 #    remote_src: yes
 
-#- name: "Start Deamons & Cron"
-#  raw: "{{ item }}"
-#  with_items:
-#    -  sudo su - otrs -c "/opt/otrs/bin/otrs.Daemon.pl start"
+- name: "Start Deamons & Cron"
+  raw: "{{ item }}"
+  with_items:
+    -  sudo su - otobo -c "/opt/otobo/bin/otobo.Daemon.pl start"
 #    -  sudo su - otrs -c "/opt/otrs/bin/Cron.sh start"
