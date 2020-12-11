@@ -15,13 +15,16 @@
 #   otobo_version      : 'otrs-6.0.19'                                            # Version of OTOBO
 #   otobo_download_url : 'https://ftp.otrs.org/pub/otrs/{{ otrs_version }}.zip'   # Url where to download the resources.
 #   otobo_dest         : '/opt/otrs-workingdir/releases/{{ otrs_version }}/       # Destination to unarchive the resources.
-#   otobo_backups      : '/opt/otrs-workingdir/backups/'                          # Where to place the OTRS backups
+#   otobo_backups      : '/opt/otrs-workingdir/backups/'                          # Where to place the OTRS backups.
+#   otobo_email        : 'support@example.net'                                    # Set support mail address.
+#   otobo_fqdn         : 'servicedesk.example.net'                                # Set fqdn from the site.
 #
 otobo_version      : 'otobo-latest-10.0'
 otobo_download_url : 'https://ftp.otobo.org/pub/otobo/{{ otobo_version }}.tar.gz'
 otobo_dest         : '/opt/otobo/'
 otobo_backups      : '/opt/otobo-workingdir/backups/'
-
+otobo_email        : 'support@example.net'
+otobo_fqdn         : 'servicedesk.example.net'
 
 # -- MySQL User settings --
 #
@@ -56,3 +59,5 @@ otobo_my_max_allowed_packet   : '64M'
 otobo_my_query_cache_size     : '36M'
 otobo_my_innodb_log_file_size : '256M'
 otobo_my_character_set_server : 'utf8'
+
+
