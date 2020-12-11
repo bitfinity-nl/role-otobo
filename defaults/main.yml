@@ -24,7 +24,8 @@ otobo_download_url : 'https://ftp.otobo.org/pub/otobo/{{ otobo_version }}.tar.gz
 otobo_dest         : '/opt/otobo/'
 otobo_backups      : '/opt/otobo-workingdir/backups/'
 otobo_email        : 'support@example.net'
-otobo_fqdn         : 'servicedesk.example.net'
+otobo_ServerName   : '{{ ansible_hostname }}'
+otobo_ServerAlias  : 'servicedesk.example.net'
 
 # -- MySQL User settings --
 #
