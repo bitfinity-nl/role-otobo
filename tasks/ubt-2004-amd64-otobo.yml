@@ -69,18 +69,18 @@
     state: directory
   with_items:
     - "/opt/otobo"
-#    - "{{ otrs_backups }}"
+    - "{{ otobo_backups }}"
 
 #- name: "Dowload sources from GIT"
 #  git:
 #    repo: https://github.com/OTRS/otrs.git
 #    dest: "/opt/otrs"
 
-#- name: "Download sources from OTRS"
-#  unarchive: 
-#    src: "{{ otrs_download_url }}"
-#    dest: "{{ otrs_dest }}"
-#    remote_src: yes
+- name: "Download sources from OTRS"
+  unarchive: 
+    src: "{{ otobo_download_url }}"
+    dest: "{{ otobo_dest }}"
+    remote_src: yes
 
 #- name: "Create symlink from {{ otrs_dest }} to /opt/otrs"
 #  file:
