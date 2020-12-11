@@ -19,13 +19,17 @@
 #   otobo_email        : 'support@example.net'                                    # Set support mail address.
 #   otobo_fqdn         : 'servicedesk.example.net'                                # Set fqdn from the site.
 #
-otobo_version      : 'otobo-latest-10.0'
-otobo_download_url : 'https://ftp.otobo.org/pub/otobo/{{ otobo_version }}.tar.gz'
-otobo_dest         : '/opt/otobo/'
-otobo_backups      : '/opt/otobo-workingdir/backups/'
-otobo_email        : 'support@example.net'
-otobo_ServerName   : '{{ ansible_hostname }}'
-otobo_ServerAlias  : 'servicedesk.example.net'
+otobo_version                 : 'otobo-latest-10.0'
+otobo_download_url            : 'https://ftp.otobo.org/pub/otobo/{{ otobo_version }}.tar.gz'
+otobo_dest                    : '/opt/otobo/'
+otobo_backups                 : '/opt/otobo-workingdir/backups/'
+otobo_email                   : 'support@example.net'
+otobo_ServerName              : '{{ ansible_hostname }}'
+otobo_ServerAlias             : 'servicedesk.example.net'
+otobo_SSLCertificateFile      : '/etc/letsencrypt/live/test.bitfinity.nl/cert.pem'
+otobo_SSLCertificateKeyFile   : '/etc/letsencrypt/live/test.bitfinity.nl/privkey.pem'
+otobo_SSLCertificateChainFile : '/etc/letsencrypt/live/test.bitfinity.nl/chain.pem'
+
 
 # -- MySQL User settings --
 #
