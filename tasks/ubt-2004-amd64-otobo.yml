@@ -152,6 +152,6 @@
 - name: "Start Deamons & Cron"
   raw: "{{ item }}"
   with_items:
-    - /opt/otobo/bin/Cron.sh
+#    - /opt/otobo/bin/Cron.sh
     -  sudo su - otobo -c "/opt/otobo/bin/otobo.Daemon.pl start"
-#    -  sudo su - otrs -c "/opt/otrs/bin/Cron.sh start"
+    -  sudo su - otobo -c "/opt/otobo/bin/Cron.sh start"
