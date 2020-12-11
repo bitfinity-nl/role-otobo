@@ -128,10 +128,10 @@
   notify: restart_apache2
 
 - name: "Enable zzz_otobo-80.conf and zzz_otobo-443.conf"
-  command: "a2ensite {{ items }}"
-  with_items:
-    - zzz_otobo-80.conf
-    - zzz_otobo-443.conf
+  command: a2ensite zzz_otobo-80.conf zzz_otobo-443.conf
+#  with_items:
+#    - zzz_otobo-80.conf
+#    - zzz_otobo-443.conf
   notify:
     - restart_apache2
 
