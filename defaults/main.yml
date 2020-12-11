@@ -1,0 +1,19 @@
+
+
+
+# -- OTRS settings --
+#
+# Variable(s):
+#   otrs_version      : 'otrs-6.0.19'                                            # Version of OTRS
+#   otrs_download_url : 'https://ftp.otrs.org/pub/otrs/{{ otrs_version }}.zip'   # Url where to download the resources.
+#   otrs_dest         : '/opt/otrs-workingdir/releases/{{ otrs_version }}/       # Destination to unarchive the resources.
+#   otrs_backups      : '/opt/otrs-workingdir/backups/'                          # Where to place the OTRS backups
+#
+otrs_version      : 'otrs-6.0.24'
+otrs_download_url : 'https://ftp.otrs.org/pub/otrs/{{ otrs_version }}.zip'
+otrs_dest         : '/opt/otrs-workingdir/releases/'
+otrs_backups      : '/opt/otrs-workingdir/backups/'
+
+
+
+https://ftp.otobo.org/pub/otobo/otobo-latest-10.0.tar.gz
