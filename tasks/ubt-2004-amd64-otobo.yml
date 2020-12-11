@@ -68,7 +68,7 @@
     path: "{{ item }}"
     state: directory
   with_items:
-    - "/opt/otrs"
+    - "/opt/otobo"
 #    - "{{ otrs_backups }}"
 
 #- name: "Dowload sources from GIT"
@@ -90,7 +90,7 @@
 
 - name: "Create local group otrs for service account otrs user(s)"
   group:
-    name: otrs
+    name: otobo
     state: present
 
 - name: "Create local service account otrs and to security group otrs, www-data"
