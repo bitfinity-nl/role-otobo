@@ -69,7 +69,6 @@
     state: directory
   with_items:
     - "{{ otobo_dest }}"
-#    - "{{ otobo_backups }}"
 
 #- name: "Dowload sources from GIT"
 #  git:
@@ -82,12 +81,6 @@
     dest: "{{ otobo_dest }}"
     extra_opts: [--strip-components=1]
     remote_src: yes
-
-#- name: "Create symlink from {{ otrs_dest }} to /opt/otrs"
-#  file:
-#    src: "{{ otrs_dest }}"
-#    dest: /opt/otrs
-#    state: link
 
 - name: "Create local group otrs for service account otrs user(s)"
   group:
@@ -120,6 +113,26 @@
 #    src: /opt/otrs/scripts/apache2-httpd.include.conf
 #    dest: /etc/apache2/sites-enabled/otrs.conf
 #    state: link
+
+- name: "Configure Apache with and without SSL"
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - { src: 'apache2-httpd-vhost-80.include.conf.j2', dest: '/etc/apache2/sites-available/zzz_otobo-80.conf'}
+    - { src: 'apache2-httpd-vhost-443.include.conf.j2', dest: '/etc/apache2/sites-available/zzz_otobo-443.conf'}
+  notify: restart_apache
+
+- name: "Enable zzz_otobo-80.conf and zzz_otobo-443.conf"
+  command: a2ensite rundeck.conf
+  with_items:
+    - zzz_otobo-80.conf
+    - zzz_otobo-443.conf
+  notify:
+    - restart_apache
 
 - name: "Configure UFW"
   ufw:
