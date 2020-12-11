@@ -1,0 +1,19 @@
+---
+# Title: OTOBO Ticket system
+#
+# Authtor: bitfinity-nl
+# File: handlers/main.yml
+#
+# Description:
+#   OTOBO is the new free Open Source ticket system 
+#   with strong functionality AND a great look.
+
+- name: restart_apache2
+  systemd:
+    state: restarted
+    name: apache2
+
+- name: restart_mysql
+  systemd:
+    state: restarted
+    name: mysql
