@@ -1,0 +1,138 @@
+---
+# Title: OTOBO Ticket system
+#
+# Authtor: bitfinity-nl
+# File: tasks/ubt-2004-amd64-otobo.yml
+#
+# Description:
+#   OTOBO is the new free Open Source ticket system 
+#   with strong functionality AND a great look.
+
+- name: "Install packages"
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - unzip
+    - apache2 
+    - libapache2-mod-perl2
+    # Additional Perl modules
+    - libdatetime-perl
+    - libcrypt-eksblowfish-perl 
+    - libcrypt-ssleay-perl
+    - libgd-graph-perl
+    - libapache-dbi-perl
+    - libsoap-lite-perl 
+    - libarchive-zip-perl 
+    - libgd-text-perl 
+    - libnet-dns-perl 
+    - libpdf-api2-perl
+    - libauthen-ntlm-perl 
+    - libdbd-odbc-perl 
+    - libjson-xs-perl
+    - libyaml-libyaml-perl 
+    - libxml-libxml-perl 
+    - libencode-hanextra-perl 
+    - libxml-libxslt-perl 
+    - libpdf-api2-simple-perl 
+    - libmail-imapclient-perl 
+    - libtemplate-perl 
+    - libtext-csv-xs-perl 
+    - libdbd-pg-perl
+    - libapache2-mod-perl2
+    - libtemplate-perl
+    - libnet-dns-perl 
+    - libnet-ldap-perl 
+    - libio-socket-ssl-perl
+    - libdbd-mysql-perl
+    - libmoo-perl
+
+- name: "Enable Apache modules"
+  apache2_module:
+    state: present
+    name: "{{ item }}"
+  with_items:
+    - perl
+    - headers
+    - version
+    - deflate
+    - filter
+    - proxy
+    - proxy_http
+    - proxy_wstunnel
+  notify: restart_apache2
+
+- name: "Create directory structure"
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "/opt/otrs"
+#    - "{{ otrs_backups }}"
+
+#- name: "Dowload sources from GIT"
+#  git:
+#    repo: https://github.com/OTRS/otrs.git
+#    dest: "/opt/otrs"
+
+#- name: "Download sources from OTRS"
+#  unarchive: 
+#    src: "{{ otrs_download_url }}"
+#    dest: "{{ otrs_dest }}"
+#    remote_src: yes
+
+#- name: "Create symlink from {{ otrs_dest }} to /opt/otrs"
+#  file:
+#    src: "{{ otrs_dest }}"
+#    dest: /opt/otrs
+#    state: link
+
+#- name: "Create local group otrs for service account otrs user(s)"
+#  group:
+#    name: otrs
+#    state: present
+
+- name: "Create local service account otrs and to security group otrs, www-data"
+  user:
+    name: otrs
+    home: /opt/otrs
+    group: otrs
+    groups: www-data
+    system: yes
+
+#- name: "Check Perl modules"
+#  command: /opt/otrs/bin/otrs.CheckModules.pl
+
+#- name: "Transfer configuration template"
+#  template:
+#    src: "{{ item.src }}" 
+#    dest: "{{ item.dest }}"
+#  with_items:
+#    - { src: 'otrs-ce/Kernel/Config.pm.j2', dest: '/opt/otrs/Kernel/Config.pm' }
+
+#- name: "Set OTRS file permissions"
+#  shell: /opt/otrs/bin/otrs.SetPermissions.pl --web-group=www-data
+
+#- name: "Create symlink from {{ otrs_dest }} to /opt/otrs"
+#  file:
+#    src: /opt/otrs/scripts/apache2-httpd.include.conf
+#    dest: /etc/apache2/sites-enabled/otrs.conf
+#    state: link
+
+- name: "Configure UFW"
+  ufw:
+    rule: allow
+    name: Apache
+
+#- name: "Copy /opt/otrs/var/cron/otrs_daemon.dist to /opt/otrs/var/cron/otrs_daemon"
+#  copy:
+#    src: /opt/otrs/var/cron/otrs_daemon.dist
+#    dest: /opt/otrs/var/cron/otrs_daemon
+#    remote_src: yes
+
+#- name: "Start Deamons & Cron"
+#  raw: "{{ item }}"
+#  with_items:
+#    -  sudo su - otrs -c "/opt/otrs/bin/otrs.Daemon.pl start"
+#    -  sudo su - otrs -c "/opt/otrs/bin/Cron.sh start"
