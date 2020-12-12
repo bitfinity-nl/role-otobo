@@ -44,6 +44,7 @@
     replace: "{{ item.replace }}"
   with_items:
     - { find: '-Xms1g', replace: '-Xms4g' }
+    - { find: '-Xmx1g', replace: '-Xmx4g' }
   notify:
     - restart_elasticsearch
-    - { find: '-Xmx1g', replace: '-Xmx4g' }    
+ 
