@@ -148,6 +148,14 @@
   with_items:
     - { src: '/opt/otobo/var/cron/otobo_daemon.dist', dest: '/opt/otobo/var/cron/otobo.Daemon'}
     - { src: '/opt/otobo/var/cron/aaa_base.dist', dest: '/opt/otobo/var/cron/aaa_base'}
+
+- name: "Create directory/opt/otobo/var/tmp/"
+  file:
+    path: /opt/otobo/var/tmp/ 
+    state: directory
+    owner: otobo
+    group: www-data
+    mode: 0775
     
 - name: "Start Deamons & Cron"
   raw: "{{ item }}"
