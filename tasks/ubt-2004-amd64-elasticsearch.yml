@@ -1,0 +1,32 @@
+
+---
+# Title: OTOBO Ticket system
+#
+# Authtor: bitfinity-nl
+# File: tasks/ubt-2004-amd64-elasticsearch.yml
+#
+# Description:
+#   OTOBO is the new free Open Source ticket system 
+#   with strong functionality AND a great look.
+
+- name: "Import GPG-KEY-elasticsearch key"
+  apt_key:
+    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: "Add Elasticsearch repository to elastic-7.x.list"
+  apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
+    state: present
+    filename: elastic-7.x.list
+
+- name: "Install packages"
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  vars:
+    packages:
+    - openjdk-8-jdk
+    - elasticsearch
+    
