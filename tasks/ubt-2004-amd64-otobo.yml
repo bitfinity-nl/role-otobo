@@ -142,8 +142,8 @@
 
 - name: "Copy /opt/otrs/var/cron/otrs_daemon.dist to /opt/otrs/var/cron/otrs_daemon (WIP)"
   copy:
-    src: /opt/otobo/scripts/database/otobo_daemon.dist
-    dest: /opt/otrs/var/cron/otrs_daemon
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
     remote_src: yes
   with_items:
     - { src: '/opt/otobo/scripts/database/otobo_daemon.dist', dest: '/opt/otobo/scripts/database/otobo_daemon'}
