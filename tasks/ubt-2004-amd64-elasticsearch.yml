@@ -40,7 +40,7 @@
 - name: "Fix for not starting Elasticsearch"
   blockinfile:
     path:  /etc/elasticsearch/elasticsearch.yml
-    marker: "<!-- {mark} ANSIBLE MANAGED BLOCK - Fix for not starting Elasticsearch -->"
+    marker: "# <!-- {mark} ANSIBLE MANAGED BLOCK - Fix for not starting Elasticsearch -->"
     block: |
       xpack.ml.enabled: false
 
