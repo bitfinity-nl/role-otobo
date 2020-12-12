@@ -1,0 +1,27 @@
+  
+---
+# Title: OTOBO Ticket system
+#
+# Authtor: bitfinity-nl
+# File: tasks/ubt-2004-amd64-ldap.yml
+#
+# Description:
+#   OTOBO is the new free Open Source ticket system 
+#   with strong functionality AND a great look.
+#
+# Source(s):
+#   - https://doc.otobo.org/manual/admin/stable/en/content/users-groups-roles/agents.html
+#
+
+- name: "Add LDAP/AD configuration"
+  blockinfile:
+    path: /opt/otobo/Kernel/Config.pm
+    marker: "<!-- {mark} ANSIBLE MANAGED BLOCK -->"
+    insertafter: "# $Self->{CheckMXRecord} = 0;"
+    block: |2
+          $Self->{AuthModule} = 'Kernel::System::Auth::LDAP';
+          $Self->{'AuthModule::LDAP::Host'} = 'ldap.example.com';
+          $Self->{'AuthModule::LDAP::BaseDN'} = 'dc=example,dc=com';
+          $Self->{'AuthModule::LDAP::UID'} = 'uid';
+
+
