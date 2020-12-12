@@ -100,7 +100,7 @@ otobo_ad_userattr     : 'DN'
 otobo_ad_searchuserdn : 'CN=svc_otobo,OU=Service Accounts,{{ otobo_ad_basedn }}'
 otobo_ad_searchuserpw : 'Atyourserv1c3'
 
-otobo_ad_account      : 'adm_otrs'
+otobo_ad_account      : 'adm_otobo'
 otobo_ad_firstname    : '{{ otobo_ad_account }}'
 otobo_ad_lastname     : '{{ otobo_ad_account }}'
 otobo_ad_email        : '{{ otobo_email }}'
