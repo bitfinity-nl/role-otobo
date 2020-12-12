@@ -35,3 +35,14 @@
   with_items:
     -  /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch ingest-attachment
     -  /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch analysis-icu
+
+- name: "Configure Elasticsearch"
+  replace:
+    path: /etc/elasticsearch/jvm.options
+    regexp: "{{ item.find }}"
+    replace: "{{ item.replace }}"
+  with_items:
+    - { find: '-Xms1g', replace: '-Xms4g' }
+  notify:
+    - restart_elasticsearch
+    - { find: '-Xmx1g', replace: '-Xmx4g' }    
