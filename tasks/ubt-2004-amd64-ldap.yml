@@ -24,4 +24,7 @@
           $Self->{'AuthModule::LDAP::BaseDN'} = '{{ otobo_ad_basedn }}';
           $Self->{'AuthModule::LDAP::UID'} = '{{ otobo_ad_uid }}';
 
+          # Bind DN to LDAP / Active Directory for searching accounts.
+          $Self->{'AuthSyncModule::LDAP::SearchUserDN'} = '{{ otobo_ad_searchuserdn }}';
+          $Self->{'AuthSyncModule::LDAP::SearchUserPw'} = '{{ otobo_ad_searchuserpw }}';
 
