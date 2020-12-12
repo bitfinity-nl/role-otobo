@@ -17,3 +17,8 @@
   systemd:
     state: restarted
     name: mariadb
+
+- name: restart_elasticsearch
+  systemd:
+    state: restarted
+    name: elasticsearch
