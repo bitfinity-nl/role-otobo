@@ -16,7 +16,7 @@
 - name: "Add LDAP/AD configuration"
   blockinfile:
     path: /opt/otobo/Kernel/Config.pm
-    marker: "<!-- {mark} ANSIBLE MANAGED BLOCK -->"
+    marker: "    #<!-- {mark} ANSIBLE MANAGED BLOCK -->"
     insertafter: ".*#*Self.*{CheckMXRecord} = 0;"
     block: |2
           $Self->{AuthModule} = 'Kernel::System::Auth::LDAP';
