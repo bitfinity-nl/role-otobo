@@ -20,8 +20,8 @@
     insertafter: ".*#*Self.*{CheckMXRecord} = 0;"
     block: |2
           $Self->{AuthModule} = 'Kernel::System::Auth::LDAP';
-          $Self->{'AuthModule::LDAP::Host'} = 'ldap.example.com';
-          $Self->{'AuthModule::LDAP::BaseDN'} = 'dc=example,dc=com';
-          $Self->{'AuthModule::LDAP::UID'} = 'uid';
+          $Self->{'AuthModule::LDAP::Host'} = '{{ otobo_ad_dc }}';
+          $Self->{'AuthModule::LDAP::BaseDN'} = '{{ otobo_ad_basedn }}';
+          $Self->{'AuthModule::LDAP::UID'} = '{{ otobo_ad_uid }}';
 
 
