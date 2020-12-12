@@ -28,3 +28,13 @@
           $Self->{'AuthSyncModule::LDAP::SearchUserDN'} = '{{ otobo_ad_searchuserdn }}';
           $Self->{'AuthSyncModule::LDAP::SearchUserPw'} = '{{ otobo_ad_searchuserpw }}';
 
+- name: "Add LDAP Active Directory administrative user to otobo"
+  raw: sudo su - otobo -c "/opt/otobo/bin/otrs.Console.pl Admin::User::Add --user-name {{ otobo_ad_account }} --first-name {{ otobo_ad_firstname }} --last-name {{ otobo_ad_lastname }} --email-address {{ otobo_ad_email }} --quiet"
+  ignore_errors: yes
+
+- name: "Add agent adm_otobo to group admin/stats/users with rw permissions"
+  raw: sudo su - otrs -c "/opt/otobo/bin/otrs.Console.pl Admin::Group::UserLink --user-name {{ otobo_ad_account }} --group-name {{ item }} --permission rw"
+  with_items:
+    - admin
+    - stats
+    - users
