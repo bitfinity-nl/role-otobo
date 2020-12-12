@@ -139,9 +139,6 @@
 
 - name: "Enable zzz_otobo-80.conf and zzz_otobo-443.conf"
   command: a2ensite zzz_otobo-80.conf zzz_otobo-443.conf
-#  with_items:
-#    - zzz_otobo-80.conf
-#    - zzz_otobo-443.conf
   notify:
     - restart_apache2
 
@@ -170,6 +167,11 @@
 - name: "Start Deamons & Cron"
   raw: "{{ item }}"
   with_items:
-#    - /opt/otobo/bin/Cron.sh
     -  sudo su - otobo -c "/opt/otobo/bin/otobo.Daemon.pl start"
     -  sudo su - otobo -c "/opt/otobo/bin/Cron.sh start"
+
+- name: "Set password for root@localhost"
+  raw: su -c "/opt/otrs/bin/otrs.Console.pl Admin::User::SetPassword root@localhost {{ otobo_root_password }}" -s /bin/bash otrs
+  ignore_errors: yes
+  
+ 
