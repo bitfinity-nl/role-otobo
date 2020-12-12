@@ -109,12 +109,22 @@
 #  shell: /opt/otobo/bin/otobo.SetPermissions.pl --web-group=www-data
   shell: /opt/otobo/bin/otobo.SetPermissions.pl
 
-#- name: "Create symlink from {{ otrs_dest }} to /opt/otrs"
-#  file:
-#    src: /opt/otrs/scripts/apache2-httpd.include.conf
-#    dest: /etc/apache2/sites-enabled/otrs.conf
-#    state: link
+- name: "Create symlink from {{ otrs_dest }} to /opt/otrs"
+  file:
+    src: /opt/otobo/scripts/apache2-httpd.include.conf
+    dest: /etc/apache2/sites-enabled/zzz_otobo.conf
+    state: link
+  notify: restart_apache2
 
+#- name: "Configure Apache without SSL support"
+#  copy:
+#    src: "{{ item.src }}"
+#    dest: "{{ item.dest }}"
+#    remote_src: yes
+#  with_items:
+#    - { src: '/opt/otobo/scripts/apache2-httpd.include.conf', dest: '/etc/apache2/sites-enabled/zzz_otobo.conf'}
+#  notify: restart_apache2
+  
 - name: "Configure Apache with and without SSL"
   template:
     src: "{{ item.src }}"
