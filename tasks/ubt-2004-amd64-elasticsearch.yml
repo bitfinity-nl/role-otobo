@@ -35,6 +35,7 @@
   with_items:
     -  /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch ingest-attachment
     -  /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch analysis-icu
+  ignore_errors: yes
 
 - name: "Configure Elasticsearch"
   replace:
