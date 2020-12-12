@@ -37,6 +37,13 @@
     -  /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch analysis-icu
   ignore_errors: yes
 
+- name: "Fix for not starting Elasticsearch"
+  blockinfile:
+    path:  /etc/elasticsearch/elasticsearch.yml
+    marker: "<!-- {mark} ANSIBLE MANAGED BLOCK - Fix for not starting Elasticsearch -->"
+    block: |
+      xpack.ml.enabled: false
+
 - name: "Enable Elasticsearch on boot"
   systemd:
     name: elasticsearch
