@@ -97,7 +97,7 @@ otobo_ad_uid          : 'sAMAccountName'
 otobo_ad_groupdn      : 'cn=app_otrs_agent,ou=applications,ou=resources,{{ otobo_ad_basedn }}'
 otobo_ad_accessattr   : 'member'
 otobo_ad_userattr     : 'DN'
-otobo_ad_searchuserdn : 'CN=svc_otrs,OU=Service Accounts,{{ otrs_ad_basedn }}'
+otobo_ad_searchuserdn : 'CN=svc_otrs,OU=Service Accounts,{{ otobo_ad_basedn }}'
 otobo_ad_searchuserpw : 'Atyourserv1c3'
 
 otobo_ad_account      : 'adm_otrs'
