@@ -171,7 +171,7 @@
     -  sudo su - otobo -c "/opt/otobo/bin/Cron.sh start"
 
 - name: "Set password for root@localhost"
-  raw: sudo su - otobo -c "/opt/otrs/bin/otrs.Console.pl Admin::User::SetPassword root@localhost {{ otobo_root_password }}" -s /bin/bash otrs
+  raw: sudo su - otobo -c "/opt/otobo/bin/otobo.Console.pl Admin::User::SetPassword root@localhost {{ otobo_root_password }}" 
   ignore_errors: yes
   
  
