@@ -67,3 +67,40 @@ otobo_my_innodb_log_file_size : '256M'
 otobo_my_character_set_server : 'utf8'
 
 
+# -- AD/LDAP (authentication) backend configuration --
+#
+# Variable(s): 
+#   otobo_ad_status       : 'disabled'                                                              # Enable AD/LDAP authentication (Leave First run disabled).  
+#   otobo_ad_dc           : 'dc01.example.net'                                                      # IP or hostname to DC or LDAP server.
+#   otobo_ad_basedn       : 'ou=example,dc=example,dc=net'                                          # Base DN (for searching users/agents).
+#   otobo_ad_uid          : 'sAMAccountName'                                                        # AD/LDAP authenticaton (default=sAMAccountName).
+#   otobo_ad_groupdn      : 'cn=app_otrs_agent,ou=applications,ou=resources,{{ otrs_ad_basedn }}'   # Agents must be member of a security group.
+#   otobo_ad_accessattr   : 'member'                                                                # Attribute to check if the user is member to the specificied security group.
+#   otobo_ad_searchuserdn : 'CN=svc_otrs,OU=Service Accounts,{{ otrs_ad_basedn }}'                  # Service account for reading AD/LDAP. 
+#   otobo_ad_searchuserpw : 'Atyourserv1c3'                                                         # Password for service account.
+#
+#   -- Administrative account for OTRS --
+#   otobo_ad_account      : 'adm_otrs'                                                              # AD/LDAP administrative account for OTRS (should exist in AD/LDAP).
+#   otobo_ad_firstname    : '{{ otrs_ad_account }}'                                                 # Firstname of the administrative account.
+#   otobo_ad_lastname     : '{{ otrs_ad_account }}'                                                 # Lastname of the administrative account.
+#   otobo_ad_email        : 'adm_otrs@example.com'                                                  # E-mail address of the administrative account.
+#
+# Comment:
+#   For more information read:
+#     - file: tasks/ldap-configuration
+#     - url:  https://doc.otobo.org/manual/admin/stable/en/content/users-groups-roles/agents.html
+#
+otobo_ad_status       : 'enabled'
+otobo_ad_dc           : '{{ def_ad_dc01 }}'
+otobo_ad_basedn       : '{{ def_ad_basedn }}'
+otobo_ad_uid          : 'sAMAccountName'
+otobo_ad_groupdn      : 'cn=app_otrs_agent,ou=applications,ou=resources,{{ otrs_ad_basedn }}'
+otobo_ad_accessattr   : 'member'
+otobo_ad_userattr     : 'DN'
+otobo_ad_searchuserdn : 'CN=svc_otrs,OU=Service Accounts,{{ otrs_ad_basedn }}'
+otobo_ad_searchuserpw : 'Atyourserv1c3'
+
+otobo_ad_account      : 'adm_otrs'
+otobo_ad_firstname    : '{{ otrs_ad_account }}'
+otobo_ad_lastname     : '{{ otrs_ad_account }}'
+otobo_ad_email        : 'adm_otrs@example.com'
