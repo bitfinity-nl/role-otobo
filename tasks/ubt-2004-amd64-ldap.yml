@@ -121,7 +121,7 @@
                # show not own tickets in customer panel, CompanyTickets
                CustomerUserExcludePrimaryCustomerID => 0,
                # add an ldap filter for valid users (expert setting)
-#              CustomerUserValidFilter => '(!(description=locked))',
+               #-> CustomerUserValidFilter => '(!(description=locked))',
                # administrator can't change customer preferences
                AdminSetPreferences => 0,
                # cache time to live in sec. - cache any database queries
