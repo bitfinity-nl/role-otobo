@@ -26,6 +26,127 @@
           # Bind DN to LDAP-Active Directory for searching accounts.
           $Self->{'AuthSyncModule::LDAP::SearchUserDN'} = '{{ otobo_ad_searchuserdn }}';
           $Self->{'AuthSyncModule::LDAP::SearchUserPw'} = '{{ otobo_ad_searchuserpw }}';
+          
+          # Check if the user is allowed to auth in a posixGroup (WIP)
+          $Self->{'AuthModule::LDAP::GroupDN'} = 'cn=app_otrs_agent,ou=applications,ou=resources,ou=bitfinity,dc=bitfinity,dc=net';
+          $Self->{'AuthModule::LDAP::AccessAttr'} = 'member';
+          $Self->{'AuthModule::LDAP::UserAttr'} = 'DN';
+
+          # Net::LDAP new params (if needed - for more info see perldoc Net::LDAP)
+          $Self->{'AuthModule::LDAP::Params'} = {
+              port => 389,
+              timeout => 120,
+              async => 0,
+              version => 3,
+          };
+
+          # ----------------------------------------------------------
+          # -- Begin: LDAP-AD - Agent - Now sync data with OTOBO DB --
+          # ----------------------------------------------------------
+          
+          $Self->{'AuthSyncModule'} = 'Kernel::System::Auth::Sync::LDAP';
+          $Self->{'AuthSyncModule::LDAP::Host'} = '192.178.30.102';
+          $Self->{'AuthSyncModule::LDAP::BaseDN'} = 'ou=bitfinity,dc=bitfinity,dc=net';
+          $Self->{'AuthSyncModule::LDAP::UID'} = 'sAMAccountName';
+          $Self->{'AuthSyncModule::LDAP::SearchUserDN'} = 'CN=svc_otrs,OU=Service Accounts,ou=bitfinity,dc=bitfinity,dc=net';
+          $Self->{'AuthSyncModule::LDAP::SearchUserPw'} = 'DitiseenticketsysteemvoorBitfinity!';
+
+          $Self->{'AuthSyncModule::LDAP::UserSyncMap'} = {
+          # DB -> LDAP
+              UserFirstname => 'givenName',
+              UserLastname  => 'sn',
+              UserEmail     => 'mail',
+          };
+
+          # AuthSyncModule::LDAP::UserSyncInitialGroups
+          # (sync following group with rw permission after initial create of first agent
+          # login)
+          $Self->{'AuthSyncModule::LDAP::UserSyncInitialGroups'} = [
+              'users',
+          ];
+          
+          # --------------------------------------------------------
+          # -- End: LDAP-AD - Agent - Now sync data with OTOBO DB --
+          # --------------------------------------------------------
+
+          # -------------------------------------------------------------
+          # -- Begin: LDAP-AD - Customer - Now sync data with OTOBO DB --
+          # -------------------------------------------------------------
+
+          # (customer user ldap backend and settings)
+          $Self->{CustomerUser1} = {
+              Name => 'LDAP Data Source',
+              Module => 'Kernel::System::CustomerUser::LDAP',
+              Params => {
+                   # ldap host
+                   Host => '192.178.30.102',
+                   # ldap base dn
+                   BaseDN => 'ou=bitfinity,dc=bitfinity,dc=net',
+                   # search scope (one|sub)
+                   SSCOPE => 'sub',
+                   # The following is valid but would only be necessary if the
+                   # anonymous user does NOT have permission to read from the LDAP tree
+                   UserDN => 'CN=svc_otrs,OU=Service Accounts,ou=bitfinity,dc=bitfinity,dc=net',
+                   UserPw => 'DitiseenticketsysteemvoorBitfinity!',
+                   # in case you want to add always one filter to each ldap query, use
+                   # this option. e. g. AlwaysFilter => '(mail=*)' or AlwaysFilter => '(objectclass=user)'
+      #            AlwaysFilter => '',
+                   # if your frontend is e. g. iso-8859-1 and the charset of your
+                   # ldap server is utf-8, use these options.
+      #            SourceCharset => 'utf-8',
+#                  DestCharset => 'iso-8859-1',
+                   # if both your frontend and your LDAP are unicode, use this:
+                   SourceCharset => 'utf-8',
+                   DestCharset   => 'utf-8',
+
+                   # Net::LDAP new params (if needed - for more info see perldoc Net::LDAP)
+                   Params => {
+#                       port => 389,
+                        port => 3268,
+                        timeout => 120,
+                        async => 0,
+                        version => 3,
+                   },
+               },
+                   ReadOnly => 1,
+                       # customer unique id
+               CustomerKey => 'sAMAccountName',
+               # customer #
+               CustomerID => 'mail',
+               CustomerUserListFields => ['cn', 'mail'],
+               CustomerUserSearchFields => ['cn', 'givenname', 'mail'],
+               CustomerUserSearchPrefix => '',
+               CustomerUserSearchSuffix => '*',
+               CustomerUserSearchListLimit => 250,
+               CustomerUserPostMasterSearchFields => ['mail'],
+               CustomerUserNameFields => ['givenname', 'sn'],
+               # show not own tickets in customer panel, CompanyTickets
+               CustomerUserExcludePrimaryCustomerID => 0,
+               # add an ldap filter for valid users (expert setting)
+#              CustomerUserValidFilter => '(!(description=locked))',
+               # administrator can't change customer preferences
+               AdminSetPreferences => 0,
+               # cache time to live in sec. - cache any database queries
+               CacheTTL => 120,
+               Map => [
+                   # note: Login, Email and CustomerID are mandatory!
+                   # if you need additional attributes from AD, just map them here.
+                   # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly
+                   [ 'UserFirstname',  'Firstname',   'givenname',       1, 1, 'var', '', 0 ],
+                   [ 'UserLastname',   'Lastname',    'sn',              1, 1, 'var', '', 0 ],
+                   [ 'UserLogin',      'Username',    'sAMAccountName',             1, 1, 'var', '', 0 ],
+                   [ 'UserEmail',      'Email',       'mail',            1, 1, 'var', '', 0 ],
+                   [ 'UserCustomerID', 'CustomerID',  'department',            0, 1, 'var', '', 0 ],
+                   [ 'UserPhone',      'Phone',      'telephoneNumber', 1, 0, 'var', '', 0 ],
+                   [ 'UserMobile',     'Mobile',      'mobile', 1, 0, 'var', '', 0 ],
+                   [ 'UserRoom',       'Room',        'physicalDeliveryOfficeName', 1, 0, 'var', '', 0 ],
+                   [ 'Department',     'Department',        'department', 1, 0, 'var', '', 0 ],
+               ],
+          };
+
+          # -----------------------------------------------------------
+          # -- End: LDAP-AD - Customer - Now sync data with OTOBO DB --
+          # -----------------------------------------------------------
 
 - name: "Add LDAP Active Directory administrative user to otobo"
   raw: sudo su - otobo -c "/opt/otobo/bin/otobo.Console.pl Admin::User::Add --user-name {{ otobo_ad_account }} --first-name {{ otobo_ad_firstname }} --last-name {{ otobo_ad_lastname }} --email-address {{ otobo_ad_email }} --quiet"
