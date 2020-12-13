@@ -18,16 +18,22 @@
     marker: "    #<!-- {mark} ANSIBLE MANAGED BLOCK -->"
     insertafter: ".*#*Self.*{CheckMXRecord} = 0;"
     block: |2
-          $Self->{AuthModule} = 'Kernel::System::Auth::LDAP';
+
+          # -------------------------------------------------------------------------
+          # -- Begin: LDAP-AD - Agent - Basic LDAP - Active Directory Auth BACKEND --
+          # -------------------------------------------------------------------------
+         
+          # Authentication module ldap settting.
+          $Self->{'AuthModule'} = 'Kernel::System::Auth::LDAP';
           $Self->{'AuthModule::LDAP::Host'} = '{{ otobo_ad_dc }}';
           $Self->{'AuthModule::LDAP::BaseDN'} = '{{ otobo_ad_basedn }}';
           $Self->{'AuthModule::LDAP::UID'} = '{{ otobo_ad_uid }}';
 
           # Bind DN to LDAP-Active Directory for searching accounts.
-          $Self->{'AuthSyncModule::LDAP::SearchUserDN'} = '{{ otobo_ad_searchuserdn }}';
-          $Self->{'AuthSyncModule::LDAP::SearchUserPw'} = '{{ otobo_ad_searchuserpw }}';
+          $Self->{'AuthModule::LDAP::SearchUserDN'} = '{{ otobo_ad_searchuserdn }}';
+          $Self->{'AuthModule::LDAP::SearchUserPw'} = '{{ otobo_ad_searchuserpw }}';
           
-          # Check if the user is allowed to auth in a posixGroup (WIP)
+          # Check if the user is allowed to auth in a posixGroup.
           $Self->{'AuthModule::LDAP::GroupDN'} = '{{ otobo_ad_groupdn }}';
           $Self->{'AuthModule::LDAP::AccessAttr'} = 'member';
           $Self->{'AuthModule::LDAP::UserAttr'} = 'DN';
@@ -40,19 +46,26 @@
               version => 3,
           };
 
-          # ----------------------------------------------------------
-          # -- Begin: LDAP-AD - Agent - Now sync data with OTOBO DB --
-          # ----------------------------------------------------------
+          # ------------------------------------------------------------------------
+          # -- Eind: LDAP-AD - Agent - Basic LDAP - Active Directory Auth BACKEND --
+          # ------------------------------------------------------------------------
           
+
+          # ------------------------------------------------------------------------------------
+          # -- Begin: LDAP-AD - Agent - Sync LDAP - Active Directory DB with OTOBO DB BACKEND --
+          # ------------------------------------------------------------------------------------
+         
+          # Authentication module ldap settting.
           $Self->{'AuthSyncModule'} = 'Kernel::System::Auth::Sync::LDAP';
           $Self->{'AuthSyncModule::LDAP::Host'} = '{{ otobo_ad_dc }}';
           $Self->{'AuthSyncModule::LDAP::BaseDN'} = '{{ otobo_ad_basedn }}';
           $Self->{'AuthSyncModule::LDAP::UID'} = '{{ otobo_ad_uid }}';
+          
+          # Bind DN to LDAP-Active Directory for searching accounts.
           $Self->{'AuthSyncModule::LDAP::SearchUserDN'} = '{{ otobo_ad_searchuserdn }}';
           $Self->{'AuthSyncModule::LDAP::SearchUserPw'} = '{{ otobo_ad_searchuserpw }}';
 
           $Self->{'AuthSyncModule::LDAP::UserSyncMap'} = {
-          # DB -> LDAP
               UserFirstname => 'givenName',
               UserLastname  => 'sn',
               UserEmail     => 'mail',
@@ -65,51 +78,41 @@
               'users',
           ];
           
-          # --------------------------------------------------------
-          # -- End: LDAP-AD - Agent - Now sync data with OTOBO DB --
-          # --------------------------------------------------------
+          # ----------------------------------------------------------------------------------
+          # -- End: LDAP-AD - Agent - Sync LDAP - Active Directory DB with OTOBO DB BACKEND --
+          # ----------------------------------------------------------------------------------
 
-          # -------------------------------------------------------------
-          # -- Begin: LDAP-AD - Customer - Now sync data with OTOBO DB --
-          # -------------------------------------------------------------
+
+          # ---------------------------------------------------------------------------------------
+          # -- Begin: LDAP-AD - Customer - Sync LDAP - Active Directory DB with OTOBO DB BACKEND --
+          # ---------------------------------------------------------------------------------------
 
           # (customer user ldap backend and settings)
           $Self->{CustomerUser1} = {
               Name => 'LDAP Data Source',
               Module => 'Kernel::System::CustomerUser::LDAP',
               Params => {
-                   # ldap host
+                   # Authentication module ldap settting.
                    Host => '{{ otobo_ad_dc }}',
-                   # ldap base dn
-                   BaseDN => '{{ otobo_ad_basedn }}',
-                   # search scope (one|sub)
+                   BaseDN => '{{ otobo_ad_basedn }}',                  
                    SSCOPE => 'sub',
-                   # The following is valid but would only be necessary if the
-                   # anonymous user does NOT have permission to read from the LDAP tree
+                   # Bind DN to LDAP-Active Directory for searching accounts.
                    UserDN => '{{ otobo_ad_searchuserdn }}',
                    UserPw => '{{ otobo_ad_searchuserpw }}',
-                   # in case you want to add always one filter to each ldap query, use
-                   # this option. e. g. AlwaysFilter => '(mail=*)' or AlwaysFilter => '(objectclass=user)'
-                   # AlwaysFilter => '',
-                   # if your frontend is e. g. iso-8859-1 and the charset of your
-                   # ldap server is utf-8, use these options.
-                   # if both your frontend and your LDAP are unicode, use this:
                    SourceCharset => 'utf-8',
                    DestCharset   => 'utf-8',
 
                    # Net::LDAP new params (if needed - for more info see perldoc Net::LDAP)
                    Params => {
-                        # port => 389,
                         port => 3268,
                         timeout => 120,
                         async => 0,
                         version => 3,
                    },
                },
-                   ReadOnly => 1,
-                       # customer unique id
+               ReadOnly => 1,
                CustomerKey => 'sAMAccountName',
-               # customer #
+               # Customer Settings.
                CustomerID => 'mail',
                CustomerUserListFields => ['cn', 'mail'],
                CustomerUserSearchFields => ['cn', 'givenname', 'mail'],
@@ -120,31 +123,86 @@
                CustomerUserNameFields => ['givenname', 'sn'],
                # show not own tickets in customer panel, CompanyTickets
                CustomerUserExcludePrimaryCustomerID => 0,
-               # add an ldap filter for valid users (expert setting)
-               #-> CustomerUserValidFilter => '(!(description=locked))',
-               # administrator can't change customer preferences
                AdminSetPreferences => 0,
-               # cache time to live in sec. - cache any database queries
                CacheTTL => 120,
                Map => [
                    # note: Login, Email and CustomerID are mandatory!
                    # if you need additional attributes from AD, just map them here.
                    # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly
-                   [ 'UserFirstname',  'Firstname',   'givenname',       1, 1, 'var', '', 0 ],
-                   [ 'UserLastname',   'Lastname',    'sn',              1, 1, 'var', '', 0 ],
-                   [ 'UserLogin',      'Username',    'sAMAccountName',             1, 1, 'var', '', 0 ],
-                   [ 'UserEmail',      'Email',       'mail',            1, 1, 'var', '', 0 ],
-                   [ 'UserCustomerID', 'CustomerID',  'department',            0, 1, 'var', '', 0 ],
-                   [ 'UserPhone',      'Phone',      'telephoneNumber', 1, 0, 'var', '', 0 ],
-                   [ 'UserMobile',     'Mobile',      'mobile', 1, 0, 'var', '', 0 ],
-                   [ 'UserRoom',       'Room',        'physicalDeliveryOfficeName', 1, 0, 'var', '', 0 ],
-                   [ 'Department',     'Department',        'department', 1, 0, 'var', '', 0 ],
+                   [ 'UserFirstname',  'Firstname',  'givenname',                  1, 1, 'var', '', 0 ],
+                   [ 'UserLastname',   'Lastname',   'sn',                         1, 1, 'var', '', 0 ],
+                   [ 'UserLogin',      'Username',   'sAMAccountName',             1, 1, 'var', '', 0 ],
+                   [ 'UserEmail',      'Email',      'mail',                       1, 1, 'var', '', 0 ],
+                   [ 'UserCustomerID', 'CustomerID', 'department',                 0, 1, 'var', '', 0 ],
+                   [ 'UserPhone',      'Phone',      'telephoneNumber',            1, 0, 'var', '', 0 ],
+                   [ 'UserMobile',     'Mobile',     'mobile',                     1, 0, 'var', '', 0 ],
+                   [ 'UserRoom',       'Room',       'physicalDeliveryOfficeName', 1, 0, 'var', '', 0 ],
+                   [ 'Department',     'Department', 'department',                 1, 0, 'var', '', 0 ],
                ],
           };
 
-          # -----------------------------------------------------------
-          # -- End: LDAP-AD - Customer - Now sync data with OTOBO DB --
-          # -----------------------------------------------------------
+          # -------------------------------------------------------------------------------------
+          # -- End: LDAP-AD - Customer - Sync LDAP - Active Directory DB with OTOBO DB BACKEND --
+          # -------------------------------------------------------------------------------------
+
+
+          # --------------------------------------------------------
+          # -- Begin: MariaDB - Customer - OTOBO Database BACKEND --
+          # --------------------------------------------------------
+
+          # 2. Customer user backend: DB
+          $Self->{CustomerUser2} = {
+              Name => 'Customer Database',
+              Module => 'Kernel::System::CustomerUser::DB',
+              Params => {
+                  Table => 'customer_user',
+              },
+              # customer unique id
+              CustomerKey => 'login',
+              # customer #
+              CustomerID => 'customer_id',
+              CustomerValid => 'valid_id',
+              CustomerUserListFields => ['first_name', 'last_name', 'email'],
+              CustomerUserSearchFields => ['login', 'last_name', 'customer_id'],
+              CustomerUserSearchPrefix => '',
+              CustomerUserSearchSuffix => '*',
+              CustomerUserSearchListLimit => 250,
+              CustomerUserPostMasterSearchFields => ['email'],
+              CustomerUserNameFields => ['title','first_name','last_name'],
+              CustomerUserEmailUniqCheck => 1,
+              Map => [
+                  # note: Login, Email and CustomerID needed!
+                  # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly, http-link-target
+                  [ 'UserTitle',      'Title',      'title',        1, 0, 'var', '', 0 ],
+                  [ 'UserFirstname',  'Firstname',  'first_name',   1, 1, 'var', '', 0 ],
+                  [ 'UserLastname',   'Lastname',   'last_name',    1, 1, 'var', '', 0 ],
+                  [ 'UserLogin',      'Username',   'login',        1, 1, 'var', '', 0 ],
+                  [ 'UserPassword',   'Password',   'pw',           0, 0, 'var', '', 0 ],
+                  [ 'UserEmail',      'Email',      'email',        1, 1, 'var', '', 0 ],
+                  [ 'UserCustomerID', 'CustomerID', 'customer_id',  0, 1, 'var', '', 0 ],
+                  [ 'UserPhone',      'Phone',      'phone',        1, 0, 'var', '', 0 ],
+                  [ 'UserFax',        'Fax',        'fax',          1, 0, 'var', '', 0 ],
+                  [ 'UserMobile',     'Mobile',     'mobile',       1, 0, 'var', '', 0 ],
+                  [ 'UserStreet',     'Street',     'street',       1, 0, 'var', '', 0 ],
+                  [ 'UserZip',        'Zip',        'zip',          1, 0, 'var', '', 0 ],
+                  [ 'UserCity',       'City',       'city',         1, 0, 'var', '', 0 ],
+                  [ 'UserCountry',    'Country',    'country',      1, 0, 'var', '', 0 ],
+                  [ 'UserComment',    'Comment',    'comments',     1, 0, 'var', '', 0 ],
+                  [ 'ValidID',        'Valid',      'valid_id',     0, 1, 'int', '', 0 ],
+              ],
+              # default selections
+              Selections => {
+                  UserTitle => {
+                      'Mr.' => 'Mr.',
+                      'Mrs.' => 'Mrs.',
+                  },
+              },
+          };
+
+          # -------------------------------------------------------
+          # -- End: MariaDB - Customer - OTOBO Database BACKEND --
+          # -------------------------------------------------------
+
 
 - name: "Add LDAP Active Directory administrative user to otobo"
   raw: sudo su - otobo -c "/opt/otobo/bin/otobo.Console.pl Admin::User::Add --user-name {{ otobo_ad_account }} --first-name {{ otobo_ad_firstname }} --last-name {{ otobo_ad_lastname }} --email-address {{ otobo_ad_email }} --quiet"
