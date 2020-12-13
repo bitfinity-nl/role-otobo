@@ -45,11 +45,11 @@
           # ----------------------------------------------------------
           
           $Self->{'AuthSyncModule'} = 'Kernel::System::Auth::Sync::LDAP';
-          $Self->{'AuthSyncModule::LDAP::Host'} = '192.178.30.102';
-          $Self->{'AuthSyncModule::LDAP::BaseDN'} = 'ou=bitfinity,dc=bitfinity,dc=net';
-          $Self->{'AuthSyncModule::LDAP::UID'} = 'sAMAccountName';
-          $Self->{'AuthSyncModule::LDAP::SearchUserDN'} = 'CN=svc_otrs,OU=Service Accounts,ou=bitfinity,dc=bitfinity,dc=net';
-          $Self->{'AuthSyncModule::LDAP::SearchUserPw'} = 'DitiseenticketsysteemvoorBitfinity!';
+          $Self->{'AuthSyncModule::LDAP::Host'} = '{{ otobo_ad_dc }}';
+          $Self->{'AuthSyncModule::LDAP::BaseDN'} = '{{ otobo_ad_basedn }}';
+          $Self->{'AuthSyncModule::LDAP::UID'} = '{{ otobo_ad_uid }}';
+          $Self->{'AuthSyncModule::LDAP::SearchUserDN'} = '{{ otobo_ad_searchuserdn }}';
+          $Self->{'AuthSyncModule::LDAP::SearchUserPw'} = '{{ otobo_ad_searchuserpw }}';
 
           $Self->{'AuthSyncModule::LDAP::UserSyncMap'} = {
           # DB -> LDAP
@@ -79,15 +79,15 @@
               Module => 'Kernel::System::CustomerUser::LDAP',
               Params => {
                    # ldap host
-                   Host => '192.178.30.102',
+                   Host => '{{ otobo_ad_dc }}',
                    # ldap base dn
-                   BaseDN => 'ou=bitfinity,dc=bitfinity,dc=net',
+                   BaseDN => '{{ otobo_ad_basedn }}',
                    # search scope (one|sub)
                    SSCOPE => 'sub',
                    # The following is valid but would only be necessary if the
                    # anonymous user does NOT have permission to read from the LDAP tree
-                   UserDN => 'CN=svc_otrs,OU=Service Accounts,ou=bitfinity,dc=bitfinity,dc=net',
-                   UserPw => 'DitiseenticketsysteemvoorBitfinity!',
+                   UserDN => '{{ otobo_ad_searchuserdn }}',
+                   UserPw => '{{ otobo_ad_searchuserpw }}',
                    # in case you want to add always one filter to each ldap query, use
                    # this option. e. g. AlwaysFilter => '(mail=*)' or AlwaysFilter => '(objectclass=user)'
       #            AlwaysFilter => '',
