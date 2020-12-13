@@ -90,18 +90,16 @@
                    UserPw => '{{ otobo_ad_searchuserpw }}',
                    # in case you want to add always one filter to each ldap query, use
                    # this option. e. g. AlwaysFilter => '(mail=*)' or AlwaysFilter => '(objectclass=user)'
-      #            AlwaysFilter => '',
+                   # AlwaysFilter => '',
                    # if your frontend is e. g. iso-8859-1 and the charset of your
                    # ldap server is utf-8, use these options.
-      #            SourceCharset => 'utf-8',
-#                  DestCharset => 'iso-8859-1',
                    # if both your frontend and your LDAP are unicode, use this:
                    SourceCharset => 'utf-8',
                    DestCharset   => 'utf-8',
 
                    # Net::LDAP new params (if needed - for more info see perldoc Net::LDAP)
                    Params => {
-#                       port => 389,
+                        # port => 389,
                         port => 3268,
                         timeout => 120,
                         async => 0,
