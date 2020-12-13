@@ -28,7 +28,7 @@
           $Self->{'AuthSyncModule::LDAP::SearchUserPw'} = '{{ otobo_ad_searchuserpw }}';
           
           # Check if the user is allowed to auth in a posixGroup (WIP)
-          $Self->{'AuthModule::LDAP::GroupDN'} = 'cn=app_otrs_agent,ou=applications,ou=resources,ou=bitfinity,dc=bitfinity,dc=net';
+          $Self->{'AuthModule::LDAP::GroupDN'} = '{{ otobo_ad_groupdn }}';
           $Self->{'AuthModule::LDAP::AccessAttr'} = 'member';
           $Self->{'AuthModule::LDAP::UserAttr'} = 'DN';
 
