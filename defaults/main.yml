@@ -27,9 +27,9 @@ otobo_root_password           : '123654'
 otobo_email                   : 'support@example.net'
 otobo_ServerName              : '{{ ansible_hostname }}'
 otobo_ServerAlias             : 'servicedesk.example.net'
-otobo_SSLCertificateFile      : '/etc/letsencrypt/live/test.bitfinity.nl/cert.pem'
-otobo_SSLCertificateKeyFile   : '/etc/letsencrypt/live/test.bitfinity.nl/privkey.pem'
-otobo_SSLCertificateChainFile : '/etc/letsencrypt/live/test.bitfinity.nl/chain.pem'
+otobo_SSLCertificateFile      : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/cert.pem'
+otobo_SSLCertificateKeyFile   : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/privkey.pem'
+otobo_SSLCertificateChainFile : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/chain.pem'
 
 
 # -- MySQL User settings --
