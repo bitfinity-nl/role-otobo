@@ -19,13 +19,6 @@
     - { src: 'my.cnf.j2', dest: '/etc/mysql/my.cnf'}
   notify: restart_mariadb
 
-#- name: "Workaround to load custom settings my.cnf at the end"
-#  file:
-#    src: /etc/mysql/my.cnf
-#    dest: /etc/mysql/mysql.conf.d/z-loadlast-my.cnf
-#    state: link
-#  notify: restart_mysql
-
 - name: "Create OTOBO database"
   mysql_db:
     name: "{{ otobo_db_name }}"
