@@ -163,7 +163,31 @@
     owner: otobo
     group: www-data
     mode: 0775
-    
+  
+- name: "Reconfigure default value for SystemID in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm_test"
+  replace:
+     path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm_test
+     regexp: \$Self->{'SystemID'} =  '10';
+     replace: $Self->{'SystemID'} =  '{{ otobo_systemid }}';
+
+- name: "Reconfigure default value for SystemID in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm_test"
+  replace:
+     path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm_test
+     regexp: \$Self->{'HttpType'} =  'https';
+     replace: $Self->{'HttpType'} =  '{{ otobo_httptype }}';
+     
+- name: "Reconfigure default value AdminEmail in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm_test"
+  replace:
+     path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm_test
+     regexp: \$Self->{'AdminEmail'} =  'support@<OTOBO_CONFIG_FQDN>';
+     replace: $Self->{'AdminEmail'} =  '{{ otobo_adminemail }}';
+
+- name: "Reconfigure default value AdminEmail in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm_test"
+  replace:
+     path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm_test
+     regexp: \$Self->{'Organization'} =  'support@<OTOBO_CONFIG_FQDN>';
+     replace: $Self->{'Organization'} =  '{{ otobo_organization }}';
+
 #- name: "Start Deamons & Cron"
 #  raw: "{{ item }}"
 #  with_items:
@@ -173,9 +197,3 @@
 #- name: "Set password for root@localhost"
 #  raw: sudo su - otobo -c "/opt/otobo/bin/otobo.Console.pl Admin::User::SetPassword root@localhost {{ otobo_root_password }}" 
 #  ignore_errors: yes
-  
-- name: "Configure SystemID /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm_test"
-  replace:
-     path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm_test
-     regexp: \$Self->{'SystemID'} =  '24';
-     replace: $Self->{'SystemID'} =  '10';
