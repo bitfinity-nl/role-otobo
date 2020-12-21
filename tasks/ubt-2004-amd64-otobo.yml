@@ -164,25 +164,25 @@
     group: www-data
     mode: 0775
   
-- name: "Reconfigure default value for SystemID in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm_test"
+- name: "Reconfigure default value for SystemID in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: \$Self->{'SystemID'} =  '10';
      replace: $Self->{'SystemID'} =  '{{ otobo_systemid }}';
 
-- name: "Reconfigure default value for SystemID in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm_test"
+- name: "Reconfigure default value for SystemID in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: \$Self->{'HttpType'} =  'https';
      replace: $Self->{'HttpType'} =  '{{ otobo_httptype }}';
      
-- name: "Reconfigure default value AdminEmail in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm_test"
+- name: "Reconfigure default value AdminEmail in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: \$Self->{'AdminEmail'} =  'support@<OTOBO_CONFIG_FQDN>';
      replace: $Self->{'AdminEmail'} =  '{{ otobo_adminemail }}';
 
-- name: "Reconfigure default value AdminEmail in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm_test"
+- name: "Reconfigure default value AdminEmail in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: \$Self->{'Organization'} =  'Example Company';
