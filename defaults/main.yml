@@ -9,14 +9,14 @@
 #   with strong functionality AND a great look.
 
 
-# -- OTRS settings --
+# -- OTOBO settings --
 #
 # Variable(s):
 #   otobo_version      : 'otrs-6.0.19'                                            # Version of OTOBO
 #   otobo_download_url : 'https://ftp.otrs.org/pub/otrs/{{ otrs_version }}.zip'   # Url where to download the resources.
 #   otobo_dest         : '/opt/otrs-workingdir/releases/{{ otrs_version }}/       # Destination to unarchive the resources.
 #   otobo_backups      : '/opt/otrs-workingdir/backups/'                          # Where to place the OTRS backups.
-#   otobo_email        : 'support@example.net'                                    # Set support mail address.
+#   otobo_email        : 'support@example.net'                                    # Set support mail address for Apache2.
 #   otobo_fqdn         : 'servicedesk.example.net'                                # Set fqdn from the site.
 #
 otobo_version                 : 'otobo-latest-10.0'
@@ -24,13 +24,20 @@ otobo_download_url            : 'https://ftp.otobo.org/pub/otobo/{{ otobo_versio
 otobo_dest                    : '/opt/otobo/'
 otobo_backups                 : '/opt/otobo-workingdir/backups/'
 otobo_root_password           : '123654' 
+
+# - OTOBO Installer.pl settings --
+otobo_systemid                : '24'
+otobo_httptype                : 'https'
+otobo_adminemail              : 'otobo_email'
+otobo_organization            : 'The example Companay'
+
+# -- OTOBO Apache2 settings --
 otobo_email                   : 'support@example.net'
 otobo_ServerName              : '{{ ansible_hostname }}'
 otobo_ServerAlias             : 'servicedesk.example.net'
 otobo_SSLCertificateFile      : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/cert.pem'
 otobo_SSLCertificateKeyFile   : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/privkey.pem'
 otobo_SSLCertificateChainFile : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/chain.pem'
-
 
 # -- MySQL User settings --
 #
