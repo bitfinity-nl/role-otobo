@@ -163,7 +163,3 @@
     owner: otobo
     group: www-data
     mode: 0775
-
-- name: "Set password for root@localhost"
-  raw: sudo su - otobo -c "/opt/otobo/bin/otobo.Console.pl Admin::User::SetPassword root@localhost {{ otobo_root_password }}" 
-  ignore_errors: yes
