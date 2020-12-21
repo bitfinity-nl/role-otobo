@@ -174,4 +174,8 @@
 #  raw: sudo su - otobo -c "/opt/otobo/bin/otobo.Console.pl Admin::User::SetPassword root@localhost {{ otobo_root_password }}" 
 #  ignore_errors: yes
   
- 
+- name: "Configure SystemID /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm_test"
+  replace:
+     path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm_test
+     regexp: \$Self->{'SystemID'} =  '24';
+     replace: $Self->{'SystemID'} =  '10';
