@@ -1,4 +1,3 @@
-  
 ---
 # Title: OTOBO Ticket system
 #
@@ -36,7 +35,6 @@
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: \$Self->{'Organization'} =  'Example Company';
      replace: $Self->{'Organization'} =  '{{ otobo_organization }}';
-
 
 - name: "Reconfigure default value Securemode in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
