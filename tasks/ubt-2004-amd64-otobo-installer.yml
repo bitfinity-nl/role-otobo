@@ -37,6 +37,13 @@
      regexp: \$Self->{'Organization'} =  'Example Company';
      replace: $Self->{'Organization'} =  '{{ otobo_organization }}';
 
+
+- name: "Reconfigure default value Securemode in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
+  replace:
+     path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
+     regexp: \$Self->{'SecureMode'} =  '0';
+     replace: $Self->{'SecureMode'} =  '{{ otobo_securemode }}';
+     
 - name: "Set password for root@localhost"
   raw: sudo su - otobo -c "/opt/otobo/bin/otobo.Console.pl Admin::User::SetPassword root@localhost {{ otobo_root_password }}" 
   ignore_errors: yes
