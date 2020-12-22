@@ -27,8 +27,8 @@ otobo_root_password           : '123654'
 
 # - OTOBO Installer.pl settings --
 otobo_systemid                : '24'
-otobo_httptype                : 'https'
-otobo_adminemail              : 'otobo_email'
+otobo_httptype                : 'http'
+otobo_adminemail              : '{{ otobo_email }}'
 otobo_organization            : 'The example Companay'
 
 # -- OTOBO Apache2 settings --
