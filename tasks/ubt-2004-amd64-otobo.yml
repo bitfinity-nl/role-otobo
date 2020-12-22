@@ -75,19 +75,19 @@
 #    repo: https://github.com/OTRS/otrs.git
 #    dest: "/opt/otrs"
 
-- name: "Download sources from OTRS"
+- name: "Download sources from OTOBO"
   unarchive: 
     src: "{{ otobo_download_url }}"
     dest: "{{ otobo_dest }}"
     extra_opts: [--strip-components=1]
     remote_src: yes
 
-- name: "Create local group otrs for service account otrs user(s)"
+- name: "Create local group otobo for service account otobo user(s)"
   group:
     name: otobo
     state: present
 
-- name: "Create local service account otrs and to security group otrs, www-data"
+- name: "Create local service account otobo and to security group otobo, www-data"
   user:
     name: otobo
     home: /opt/otobo
@@ -109,7 +109,7 @@
 #  shell: /opt/otobo/bin/otobo.SetPermissions.pl --web-group=www-data
   shell: /opt/otobo/bin/otobo.SetPermissions.pl
 
-- name: "Create symlink from {{ otrs_dest }} to /opt/otrs"
+- name: "Create symlink from {{ otobo_dest }} to /opt/otobo"
   file:
     src: /opt/otobo/scripts/apache2-httpd.include.conf
     dest: /etc/apache2/sites-enabled/zzz_otobo.conf
@@ -147,7 +147,7 @@
     rule: allow
     name: Apache
 
-- name: "Copy /opt/otrs/var/cron/otrs_daemon.dist to /opt/otrs/var/cron/otrs_daemon (WIP)"
+- name: "Copy /opt/otobo/var/cron/otobo_daemon.dist to /opt/otobo/var/cron/otobo_daemon (WIP)"
   copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
