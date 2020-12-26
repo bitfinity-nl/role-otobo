@@ -33,11 +33,11 @@ otobo_self_organization           : 'The example Companay'
 otobo_self_securemode             : '1'
 
 otobo_sendmailmodule              : 'smtp'
-otobo_sendmailmodule_authuser     : ''
-otobo_sendmailmodule_authpassword : ''
-otobo_sendmailmodule_cmd          : ''
-otobo_sendmailmodule_port         : ''
-otobo_sendmailmodule_host         : ''
+otobo_sendmailmodule_authuser     : 'MailserverLogin'
+otobo_sendmailmodule_authpassword : 'MailserverPassword'
+otobo_sendmailmodule_cmd          : '/usr/sbin/sendmail -i -f'
+otobo_sendmailmodule_port         : '25'
+otobo_sendmailmodule_host         : 'mail.example.com'
 
 # -- OTOBO Apache2 settings --
 otobo_email                   : 'support@example.net'
