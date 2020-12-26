@@ -19,11 +19,11 @@
 #   otobo_email        : 'support@example.net'                                    # Set support mail address for Apache2.
 #   otobo_fqdn         : 'servicedesk.example.net'                                # Set fqdn from the site.
 #
-otobo_version                 : 'otobo-latest-10.0'
-otobo_download_url            : 'https://ftp.otobo.org/pub/otobo/{{ otobo_version }}.tar.gz'
-otobo_dest                    : '/opt/otobo/'
-otobo_backups                 : '/opt/otobo-workingdir/backups/'
-otobo_root_password           : '123654' 
+otobo_version                     : 'otobo-latest-10.0'
+otobo_download_url                : 'https://ftp.otobo.org/pub/otobo/{{ otobo_version }}.tar.gz'
+otobo_dest                        : '/opt/otobo/'
+otobo_backups                     : '/opt/otobo-workingdir/backups/'
+otobo_root_password               : '123654' 
 
 # - OTOBO Installer.pl settings --
 otobo_self_systemid               : '24'
@@ -39,13 +39,15 @@ otobo_sendmailmodule_cmd          : '/usr/sbin/sendmail -i -f'
 otobo_sendmailmodule_port         : '25'
 otobo_sendmailmodule_host         : 'mail.example.com'
 
+
 # -- OTOBO Apache2 settings --
-otobo_email                   : 'support@example.net'
-otobo_ServerName              : '{{ ansible_hostname }}'
-otobo_ServerAlias             : 'servicedesk.example.net'
-otobo_SSLCertificateFile      : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/cert.pem'
-otobo_SSLCertificateKeyFile   : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/privkey.pem'
-otobo_SSLCertificateChainFile : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/chain.pem'
+otobo_email                       : 'support@example.net'
+otobo_ServerName                  : '{{ ansible_hostname }}'
+otobo_ServerAlias                 : 'servicedesk.example.net'
+otobo_SSLCertificateFile          : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/cert.pem'
+otobo_SSLCertificateKeyFile       : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/privkey.pem'
+otobo_SSLCertificateChainFile     : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/chain.pem'
+
 
 # -- MySQL User settings --
 #
