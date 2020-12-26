@@ -48,7 +48,7 @@
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: \$Self->{'SendmailModule'} =  'Kernel::System::Email::Sendmail';
-     replace: $Self->{'SendmailModule'} =  'Kernel::System::Email::SMTP';
+     replace: $Self->{'SendmailModule'} =  'Kernel::System::Email::{{ otobo_sendmailmodule }}';
 
 - name: "(WIP) Reconfigure default value SendmailModule AuthPassword in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
