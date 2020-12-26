@@ -16,47 +16,47 @@
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: \$Self->{'SystemID'} =  '10';
-     replace: $Self->{'SystemID'} =  '{{ otobo_systemid }}';
+     replace: $Self->{'SystemID'} =  '{{ otobo_self_systemid }}';
 
 - name: "Reconfigure default value for HttpType in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: \$Self->{'HttpType'} =  'https';
-     replace: $Self->{'HttpType'} =  '{{ otobo_httptype }}';
+     replace: $Self->{'HttpType'} =  '{{ otobo_self_httptype }}';
      
 - name: "Reconfigure default value AdminEmail in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: \$Self->{'AdminEmail'} =  'support@<OTOBO_CONFIG_FQDN>';
-     replace: $Self->{'AdminEmail'} =  '{{ otobo_adminemail }}';
+     replace: $Self->{'AdminEmail'} =  '{{ otobo_self_adminemail }}';
 
 - name: "Reconfigure default value AdminEmail in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: \$Self->{'Organization'} =  'Example Company';
-     replace: $Self->{'Organization'} =  '{{ otobo_organization }}';
+     replace: $Self->{'Organization'} =  '{{ otobo_self_organization }}';
 
 - name: "Reconfigure default value Securemode in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: \$Self->{'SecureMode'} =  '0';
-     replace: $Self->{'SecureMode'} =  '{{ otobo_securemode }}';
+     replace: $Self->{'SecureMode'} =  '{{ otobo_self_securemode }}';
 
 
 #-- Installer - Authentication --
 - name: "Reconfigure default value SendmailModule in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
-     regexp: \$Self->{'SendmailModule'} =  'Kernel::System::Email::SMTP';
+     regexp: \$Self->{'SendmailModule'} =  'Kernel::System::Email::Sendmail';
      replace: $Self->{'SendmailModule'} =  'Kernel::System::Email::SMTP';
 
-- name: "Reconfigure default value SendmailModule AuthPassword in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
+- name: "(WIP) Reconfigure default value SendmailModule AuthPassword in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: \$Self->{'SendmailModule::AuthPassword'} =  'MailserverPassword';
      replace: $Self->{'SendmailModule::AuthPassword'} =  'MailserverPassword';
 
-- name: "Reconfigure default value SendmailModule AuthUser in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
+- name: "(WIP) Reconfigure default value SendmailModule AuthUser in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: \$Self->{'SendmailModule::AuthUser'} =  'MailserverLogin';
@@ -68,7 +68,7 @@
      regexp: \$Self->{'SendmailModule::CMD'} =  '/usr/sbin/sendmail -i -f';
      replace: $Self->{'SendmailModule::CMD'} =  '/usr/sbin/sendmail -i -f';
 
-- name: "Reconfigure default value SendmailModule Port in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
+- name: "(WIP)Reconfigure default value SendmailModule Port in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: \$Self->{'SendmailModule::Port'} =  '25';
@@ -77,7 +77,7 @@
 - name: "Reconfigure default value SendmailModule Host in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
-     regexp: \$Self->{'SendmailModule::Host'} =  'mail.vissersolie.nl';
+     regexp: \$Self->{'SendmailModule::Host'} =  'mail.example.com';
      replace: $Self->{'SendmailModule::Host'} =  'mail.vissersolie.nl';     
 
 #--
