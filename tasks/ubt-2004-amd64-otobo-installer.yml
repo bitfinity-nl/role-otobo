@@ -43,7 +43,7 @@
      replace: $Self->{'SecureMode'} =  '{{ otobo_self_securemode }}';
 
 
-#-- Installer - Authentication --
+#-- Installer - Configure then SendmailModule --
 - name: "Reconfigure default value SendmailModule in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
