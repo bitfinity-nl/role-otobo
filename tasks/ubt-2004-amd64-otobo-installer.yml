@@ -31,18 +31,11 @@
      # regexp: \$Self->{'AdminEmail'} =  'support@<OTOBO_CONFIG_FQDN>';
      replace: $Self->{'AdminEmail'} =  '{{ otobo_self_adminemail }}';
 
-- name: "Reconfigure default value AdminEmail in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
+- name: "Reconfigure default value Organization in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: \$Self->{'Organization'} =  '.*';
      replace: $Self->{'Organization'} =  '{{ otobo_self_organization }}';
-
-- name: "Reconfigure default value Securemode in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
-  replace:
-     path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
-     regexp: \$Self->{'SecureMode'} =  '.*';
-     replace: $Self->{'SecureMode'} =  '{{ otobo_self_securemode }}';
-
 
 #-- Installer - Configure then SendmailModule --
 - name: "Reconfigure default value SendmailModule in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
@@ -56,12 +49,14 @@
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: \$Self->{'SendmailModule::AuthPassword'} =  '.*';
      line: $Self->{'SendmailModule::AuthPassword'} =  '{{ otobo_sendmailmodule_authpassword }}';
+     insertafter: \$Self->{'SendmailModule::Host'} =  '.*';
 
 - name: "(WIP) Reconfigure default value SendmailModule AuthUser in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   lineinfile:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: \$Self->{'SendmailModule::AuthUser'} =  '.*';
      line: $Self->{'SendmailModule::AuthUser'} =  '{{ otobo_sendmailmodule_authuser }}';
+     insertafter: \$Self->{'SendmailModule::Host'} =  '.*';
      
 - name: "Reconfigure default value SendmailModule CMD in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
@@ -74,7 +69,8 @@
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: \$Self->{'SendmailModule::Port'} =  '.*';
      line: $Self->{'SendmailModule::Port'} =  '{{ otobo_sendmailmodule_port }}';
-     
+     insertafter: \$Self->{'SendmailModule::Host'} =  '.*';
+
 - name: "Reconfigure default value SendmailModule Host in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   lineinfile:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
@@ -83,6 +79,12 @@
 
 #--
 
+- name: "Reconfigure default value Securemode in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
+  replace:
+     path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
+     regexp: \$Self->{'SecureMode'} =  '.*';
+     replace: $Self->{'SecureMode'} =  '{{ otobo_self_securemode }}';
+     
 
 - name: "Set password for root@localhost"
   raw: sudo su - otobo -c "/opt/otobo/bin/otobo.Console.pl Admin::User::SetPassword root@localhost {{ otobo_root_password }}" 
