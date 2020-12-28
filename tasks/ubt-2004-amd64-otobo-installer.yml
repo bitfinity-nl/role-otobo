@@ -75,7 +75,7 @@
   lineinfile:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: \$Self->{'SendmailModule::Host'} =  '.*';
-     line: $Self->{'SendmailModule::Host'} =  '{{ otobo_sendmailmodule_host }}';     
+     line: $Self->{'SendmailModule::Host'} =  {{ otobo_sendmailmodule_host }};
 
 #--
 
