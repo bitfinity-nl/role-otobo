@@ -85,7 +85,6 @@
      regexp: \$Self->{'SecureMode'} =  '.*';
      replace: $Self->{'SecureMode'} =  '{{ otobo_self_securemode }}';
      
-
 - name: "Set password for root@localhost"
   raw: sudo su - otobo -c "/opt/otobo/bin/otobo.Console.pl Admin::User::SetPassword root@localhost {{ otobo_root_password }}" 
   ignore_errors: yes
