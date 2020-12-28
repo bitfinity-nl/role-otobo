@@ -35,11 +35,11 @@ otobo_root_password               : '123654'
 #   otobo_self_organization           : 'Example Company'           # Set the company name.
 #   otobo_self_securemode             : '1'                         # Enable securemode for protecting the installation '0' = disabled, '1' = enabled.
 #   otobo_sendmailmodule              : 'sendmail'                  # Set sendmail type: 'DoNotSendEmail', 'SMTP', 'SMTPS', 'SMTPTLS', 'Sendmail' or 'Test' 
-#   otobo_sendmailmodule_authuser     : 'MailserverLogin'           #
-#   otobo_sendmailmodule_authpassword : 'MailserverPassword'        #
-#   otobo_sendmailmodule_cmd          : '/usr/sbin/sendmail -i -f'  #
-#   otobo_sendmailmodule_port         : '25'                        #
-#   otobo_sendmailmodule_host         : 'mail.example.com'          #
+#   otobo_sendmailmodule_authuser     : 'MailserverLogin'           # Set the username for the smtp (relay) server.
+#   otobo_sendmailmodule_authpassword : 'MailserverPassword'        # Set the password for the smtp (relay) server.
+#   otobo_sendmailmodule_cmd          : '/usr/sbin/sendmail -i -f'  # Set the sendmail command.
+#   otobo_sendmailmodule_port         : '25'                        # Set the port for the smtp (relay) server.
+#   otobo_sendmailmodule_host         : 'mail.example.com'          # set the hostname/url for the smtp (relay) server.
 #
 otobo_self_systemid               : '24'
 otobo_self_httptype               : 'http'
