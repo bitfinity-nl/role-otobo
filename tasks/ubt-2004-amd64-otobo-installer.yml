@@ -75,7 +75,7 @@
   lineinfile:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: \$Self->{'SendmailModule::Host'} =  '.*';
-     line: $Self->{'SendmailModule::Host'} =  {{ otobo_sendmailmodule_host }};
+     line: $Self->{'SendmailModule::Host'} =  '{{ otobo_sendmailmodule_host }}';
 
 #--
 
@@ -83,7 +83,7 @@
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: \$Self->{'SecureMode'} =  .*;
-     replace: $Self->{'SecureMode'} =  '{{ otobo_self_securemode }}';
+     replace: $Self->{'SecureMode'} =  {{ otobo_self_securemode }};
      
 - name: "Set password for root@localhost"
   raw: sudo su - otobo -c "/opt/otobo/bin/otobo.Console.pl Admin::User::SetPassword root@localhost {{ otobo_root_password }}" 
