@@ -82,7 +82,7 @@
 - name: "Reconfigure default value Securemode in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
-     regexp: \$Self->{'SecureMode'} =  '.*';
+     regexp: \$Self->{'SecureMode'} =  .*;
      replace: $Self->{'SecureMode'} =  '{{ otobo_self_securemode }}';
      
 - name: "Set password for root@localhost"
