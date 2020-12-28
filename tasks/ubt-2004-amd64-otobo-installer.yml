@@ -15,31 +15,32 @@
 - name: "Reconfigure default value for SystemID in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
-     regexp: \$Self->{'SystemID'} =  '10';
+     regexp: \$Self->{'SystemID'} =  '.*';
      replace: $Self->{'SystemID'} =  '{{ otobo_self_systemid }}';
 
 - name: "Reconfigure default value for HttpType in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
-     regexp: \$Self->{'HttpType'} =  'https';
+     regexp: \$Self->{'HttpType'} =  '.*';
      replace: $Self->{'HttpType'} =  '{{ otobo_self_httptype }}';
      
 - name: "Reconfigure default value AdminEmail in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
-     regexp: \$Self->{'AdminEmail'} =  'support@<OTOBO_CONFIG_FQDN>';
+     regexp: \$Self->{'AdminEmail'} =  '.*';
+     # regexp: \$Self->{'AdminEmail'} =  'support@<OTOBO_CONFIG_FQDN>';
      replace: $Self->{'AdminEmail'} =  '{{ otobo_self_adminemail }}';
 
 - name: "Reconfigure default value AdminEmail in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
-     regexp: \$Self->{'Organization'} =  'Example Company';
+     regexp: \$Self->{'Organization'} =  '.*';
      replace: $Self->{'Organization'} =  '{{ otobo_self_organization }}';
 
 - name: "Reconfigure default value Securemode in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
-     regexp: \$Self->{'SecureMode'} =  '0';
+     regexp: \$Self->{'SecureMode'} =  '.*';
      replace: $Self->{'SecureMode'} =  '{{ otobo_self_securemode }}';
 
 
