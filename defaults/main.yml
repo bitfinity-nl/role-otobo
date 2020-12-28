@@ -29,7 +29,7 @@ otobo_root_password               : '123654'
 otobo_self_systemid               : '24'
 otobo_self_httptype               : 'http'
 otobo_self_adminemail             : '{{ otobo_email }}'
-otobo_self_organization           : 'The example Companay'
+otobo_self_organization           : 'Example Companay'
 otobo_self_securemode             : '1'
 
 otobo_sendmailmodule              : 'smtp'
