@@ -15,17 +15,17 @@
 #    - ansible_distribution_version == '20.04'
 #    - ansible_architecture == 'x86_64'
 
-- name: "Type:otobo, For OS: Ubuntu 20.04LTS, Arch: amd64, State: Enabled"
-  import_tasks: ubt-2004-amd64-otobo.yml
-  when:
-    - ansible_distribution_version == '20.04'
-    - ansible_architecture == 'x86_64'
+#- name: "Type:otobo, For OS: Ubuntu 20.04LTS, Arch: amd64, State: Enabled"
+#  import_tasks: ubt-2004-amd64-otobo.yml
+#  when:
+#    - ansible_distribution_version == '20.04'
+#    - ansible_architecture == 'x86_64'
 
-- name: "Type:mariadb, For OS: Ubuntu 20.04LTS, Arch: amd64, State: Enabled"
-  import_tasks: ubt-2004-amd64-mariadb.yml
-  when:
-    - ansible_distribution_version == '20.04'
-    - ansible_architecture == 'x86_64'
+#- name: "Type:mariadb, For OS: Ubuntu 20.04LTS, Arch: amd64, State: Enabled"
+#  import_tasks: ubt-2004-amd64-mariadb.yml
+#  when:
+#    - ansible_distribution_version == '20.04'
+#    - ansible_architecture == 'x86_64'
 
 - name: "Type:otobo installer, For OS: Ubuntu 20.04LTS, Arch: amd64, State: Enabled"
   import_tasks: ubt-2004-amd64-otobo-installer.yml
