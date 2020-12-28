@@ -25,14 +25,28 @@ otobo_dest                        : '/opt/otobo/'
 otobo_backups                     : '/opt/otobo-workingdir/backups/'
 otobo_root_password               : '123654' 
 
+
 # - OTOBO Installer.pl settings --
+# 
+# Variable(s):
+#   otobo_self_systemid               : '24'                        # Set SystemID.
+#   otobo_self_httptype               : 'http'                      # Set HTTP type 'http' or 'https'. 
+#   otobo_self_adminemail             : '{{ otobo_email }}'         # Set default admin e-mail.
+#   otobo_self_organization           : 'Example Company'           # Set the company name.
+#   otobo_self_securemode             : '1'                         # Enable securemode for protecting the installation '0' = disabled, '1' = enabled.
+#   otobo_sendmailmodule              : 'sendmail'                  # Set sendmail type: 'DoNotSendEmail', 'SMTP', 'SMTPS', 'SMTPTLS', 'Sendmail' or 'Test' 
+#   otobo_sendmailmodule_authuser     : 'MailserverLogin'           #
+#   otobo_sendmailmodule_authpassword : 'MailserverPassword'        #
+#   otobo_sendmailmodule_cmd          : '/usr/sbin/sendmail -i -f'  #
+#   otobo_sendmailmodule_port         : '25'                        #
+#   otobo_sendmailmodule_host         : 'mail.example.com'          #
+#
 otobo_self_systemid               : '24'
 otobo_self_httptype               : 'http'
 otobo_self_adminemail             : '{{ otobo_email }}'
-otobo_self_organization           : 'Example Companay'
+otobo_self_organization           : 'Example Company'
 otobo_self_securemode             : '1'
-
-otobo_sendmailmodule              : 'smtp'
+otobo_sendmailmodule              : 'Sendmail'
 otobo_sendmailmodule_authuser     : 'MailserverLogin'
 otobo_sendmailmodule_authpassword : 'MailserverPassword'
 otobo_sendmailmodule_cmd          : '/usr/sbin/sendmail -i -f'
