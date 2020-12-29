@@ -152,9 +152,6 @@
 
 - name: "Type:otobo installer, For OS: Ubuntu 20.04LTS, Arch: amd64, State: Enabled"
   import_tasks: ubt-2004-amd64-otobo-installer.yml
-  when:
-    - ansible_distribution_version == '20.04'
-    - ansible_architecture == 'x86_64'
 
 - name: "Copy /opt/otobo/var/cron/otobo_daemon.dist to /opt/otobo/var/cron/otobo_daemon (WIP)"
   copy:
