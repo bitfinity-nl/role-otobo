@@ -150,9 +150,6 @@
     rule: allow
     name: Apache
 
-- name: "Run the installer.pl from the cmdline"
-  import_tasks: ubt-2004-amd64-otobo-installer.yml
-
 - name: "Copy /opt/otobo/var/cron/otobo_daemon.dist to /opt/otobo/var/cron/otobo_daemon (WIP)"
   copy:
     src: "{{ item.src }}"
