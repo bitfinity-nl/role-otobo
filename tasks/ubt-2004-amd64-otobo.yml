@@ -153,7 +153,7 @@
 
 - name: "Check if configuration file /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm exists"
   stat:
-    path: if configuration file /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
+    path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
   register: result_zzzaauto
 
 - name: "Display if configuration file /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm exists"
