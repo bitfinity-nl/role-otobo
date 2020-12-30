@@ -8,9 +8,19 @@
 #   OTOBO is the new free Open Source ticket system 
 #   with strong functionality AND a great look.
 
+- name: "Check if configuration file /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm exists"
+  stat:
+    path: if configuration file /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
+  register: result
+
+- name: "Display if configuration file /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm exists"
+  debug:
+    msg: "{{ result.stat.exists }}"
+    
 - name: "Generate /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   raw: sudo su - otobo -c "/opt/otobo/bin/otobo.Console.pl Maint::Config::Rebuild" 
   ignore_errors: yes
+  when: result.stat.exists == false
     
 - name: "Reconfigure default value for SystemID in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   replace:
