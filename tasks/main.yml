@@ -8,7 +8,6 @@
 #   OTOBO is the new free Open Source ticket system 
 #   with strong functionality AND a great look.
 
-
 - name: "Type:elasticsearch, For OS: Ubuntu 20.04LTS, Arch: amd64, State: Enabled"
   import_tasks: ubt-2004-amd64-elasticsearch.yml
   when:
@@ -22,8 +21,9 @@
     - ansible_distribution_version == '20.04'
     - ansible_architecture == 'x86_64'
     
-#- name: "Type:LDAPAD, For OS: Ubuntu 20.04LTS, Arch: amd64, State: Enabled"
-#  import_tasks: ubt-2004-amd64-ldap.yml
-#  when:
-#    - ansible_distribution_version == '20.04'
-#    - ansible_architecture == 'x86_64'
+- name: "Type:LDAPAD, For OS: Ubuntu 20.04LTS, Arch: amd64, State: Enabled"
+  import_tasks: ubt-2004-amd64-ldap.yml
+  when:
+    - ansible_distribution_version == '20.04'
+    - ansible_architecture == 'x86_64'
+    - otobo_ad_status == 'enabled'
