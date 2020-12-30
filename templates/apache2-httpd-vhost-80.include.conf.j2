@@ -22,5 +22,5 @@
     Alias /otobo-web/ "/opt/otobo/var/httpd/htdocs/"
 
     # Please change here the redirect to https and add your FQDN or hostname
-    Redirect permanent / https://community.otobo.de/
+    Redirect permanent / https://{{ otobo_ServerAlias }}/
 </VirtualHost>
