@@ -44,14 +44,14 @@
      regexp: ^\$Self->{'SendmailModule'} =  'Kernel::System::Email::.*';$
      replace: $Self->{'SendmailModule'} =  'Kernel::System::Email::{{ otobo_sendmailmodule }}';
 
-- name: "(WIP) Reconfigure default value SendmailModule AuthPassword in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
+- name: "Reconfigure default value SendmailModule AuthPassword in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   lineinfile:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: ^\$Self->{'SendmailModule::AuthPassword'} =  '.*';$
      line: $Self->{'SendmailModule::AuthPassword'} =  '{{ otobo_sendmailmodule_authpassword }}';
      insertafter: \$Self->{'SendmailModule::Host'} =  '.*';
 
-- name: "(WIP) Reconfigure default value SendmailModule AuthUser in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
+- name: "Reconfigure default value SendmailModule AuthUser in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   lineinfile:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: ^\$Self->{'SendmailModule::AuthUser'} =  '.*';$
@@ -64,7 +64,7 @@
      regexp: ^\$Self->{'SendmailModule::CMD'} =  '.*';$
      replace: $Self->{'SendmailModule::CMD'} =  '{{ otobo_sendmailmodule_cmd }}';
 
-- name: "(WIP)Reconfigure default value SendmailModule Port in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
+- name: "Reconfigure default value SendmailModule Port in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
   lineinfile:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: \$Self->{'SendmailModule::Port'} =  '.*';
