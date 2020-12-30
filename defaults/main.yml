@@ -12,10 +12,10 @@
 # -- OTOBO settings --
 #
 # Variable(s):
-#   otobo_version      : 'otrs-6.0.19'                                            # Version of OTOBO
+#   otobo_version      : 'otobo-latest-10.0'                                      # Version of OTOBO
 #   otobo_download_url : 'https://ftp.otrs.org/pub/otrs/{{ otrs_version }}.zip'   # Url where to download the resources.
-#   otobo_dest         : '/opt/otrs-workingdir/releases/{{ otrs_version }}/       # Destination to unarchive the resources.
-#   otobo_backups      : '/opt/otrs-workingdir/backups/'                          # Where to place the OTRS backups. (WIP)
+#   otobo_dest         : '/opt/otobo/                                             # Destination to unarchive the resources.
+#   otobo_backups      : '/opt/otobo-workingdir/backups/'                         # Where to place the OTRS backups. (WIP)
 #   otobo_email        : 'support@example.net'                                    # Set support mail address for Apache2.
 #   otobo_fqdn         : 'servicedesk.example.net'                                # Set fqdn from the site.
 #
@@ -55,12 +55,21 @@ otobo_sendmailmodule_host         : 'mail.example.com'
 
 
 # -- OTOBO Apache2 settings --
-otobo_email                       : 'support@example.net'
-otobo_ServerName                  : '{{ ansible_hostname }}'
-otobo_ServerAlias                 : 'servicedesk.example.net'
-otobo_SSLCertificateFile          : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/cert.pem'
-otobo_SSLCertificateKeyFile       : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/privkey.pem'
-otobo_SSLCertificateChainFile     : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/chain.pem'
+#
+# Variable(s):
+#   otobo_email                   : 'support@example.net'                                        # Set support email address.
+#   otobo_ServerName              : '{{ ansible_hostname }}'                                     # Set the hostname.
+#   otobo_ServerAlias             : 'support.example.net'                                        # Set the Server alias (Domain Name).
+#   otobo_SSLCertificateFile      : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/cert.pem'     # Set the certificate file.
+#   otobo_SSLCertificateKeyFile   : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/privkey.pem'  # Set the certificate privatekey file.
+#   otobo_SSLCertificateChainFile : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/chain.pem'    # Set the certificate chain file.
+#
+otobo_email                   : 'support@example.net'
+otobo_ServerName              : '{{ ansible_hostname }}'
+otobo_ServerAlias             : 'support.example.net'
+otobo_SSLCertificateFile      : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/cert.pem'
+otobo_SSLCertificateKeyFile   : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/privkey.pem'
+otobo_SSLCertificateChainFile : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/chain.pem'
 
 
 # -- MySQL User settings --
