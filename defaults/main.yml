@@ -16,14 +16,11 @@
 #   otobo_download_url : 'https://ftp.otrs.org/pub/otrs/{{ otrs_version }}.zip'   # Url where to download the resources.
 #   otobo_dest         : '/opt/otobo/                                             # Destination to unarchive the resources.
 #   otobo_backups      : '/opt/otobo-workingdir/backups/'                         # Where to place the OTRS backups. (WIP)
-#   otobo_email        : 'support@example.net'                                    # Set support mail address for Apache2.
-#   otobo_fqdn         : 'servicedesk.example.net'                                # Set fqdn from the site.
 #
-otobo_version                     : 'otobo-latest-10.0'
-otobo_download_url                : 'https://ftp.otobo.org/pub/otobo/{{ otobo_version }}.tar.gz'
-otobo_dest                        : '/opt/otobo/'
-otobo_backups                     : '/opt/otobo-workingdir/backups/'
-otobo_root_password               : '123654' 
+otobo_version       : 'otobo-latest-10.0'
+otobo_download_url  : 'https://ftp.otobo.org/pub/otobo/{{ otobo_version }}.tar.gz'
+otobo_dest          : '/opt/otobo/'
+otobo_backups       : '/opt/otobo-workingdir/backups/'
 
 
 # - OTOBO Installer.pl settings --
@@ -40,6 +37,7 @@ otobo_root_password               : '123654'
 #   otobo_sendmailmodule_cmd          : '/usr/sbin/sendmail -i -f'  # Set the sendmail command.
 #   otobo_sendmailmodule_port         : '25'                        # Set the port for the smtp (relay) server.
 #   otobo_sendmailmodule_host         : 'mail.example.com'          # set the hostname/url for the smtp (relay) server.
+#   otobo_root_password               : '123654'                    # Set default password for root@localhost (database auth only). 
 #
 otobo_self_systemid               : '24'
 otobo_self_httptype               : 'http'
@@ -52,7 +50,7 @@ otobo_sendmailmodule_authpassword : 'MailserverPassword'
 otobo_sendmailmodule_cmd          : '/usr/sbin/sendmail -i -f'
 otobo_sendmailmodule_port         : '25'
 otobo_sendmailmodule_host         : 'mail.example.com'
-
+otobo_root_password               : '123654' 
 
 # -- OTOBO Apache2 settings --
 #
@@ -64,7 +62,6 @@ otobo_sendmailmodule_host         : 'mail.example.com'
 #   otobo_SSLCertificateKeyFile   : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/privkey.pem'  # Set the certificate privatekey file.
 #   otobo_SSLCertificateChainFile : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/chain.pem'    # Set the certificate chain file.
 #
-otobo_email                   : 'support@example.net'
 otobo_ServerName              : '{{ ansible_hostname }}'
 otobo_ServerAlias             : 'support.example.net'
 otobo_SSLCertificateFile      : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/cert.pem'
@@ -72,7 +69,7 @@ otobo_SSLCertificateKeyFile   : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/p
 otobo_SSLCertificateChainFile : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/chain.pem'
 
 
-# -- MySQL User settings --
+# -- MariaDB User settings --
 #
 # Variable(s):
 #   otobo_sys_user : 'root'      # Administrative User.
@@ -90,7 +87,7 @@ otobo_db_pass  : 'password'
 
 # -- MariaDB Database settings --
 #
-# File: my.cnf.j2 --> my-otrs.cnf
+# File: my.cnf.j2 --> my-otobo.cnf
 #
 # Variable(s):
 #   otobo_my_max_allowed_packet   : '64M'
@@ -110,7 +107,7 @@ otobo_my_character_set_server : 'utf8'
 # -- AD/LDAP (authentication) backend configuration --
 #
 # Variable(s): 
-#   otobo_ad_status       : 'disabled'                                                              # Enable AD/LDAP authentication (Leave First run disabled).  
+#   otobo_ad_status       : 'disabled'                                                              # Enable AD/LDAP authentication 'enabled' or 'disabeld'.  
 #   otobo_ad_dc           : 'dc01.example.net'                                                      # IP or hostname to DC or LDAP server.
 #   otobo_ad_basedn       : 'ou=example,dc=example,dc=net'                                          # Base DN (for searching users/agents).
 #   otobo_ad_uid          : 'sAMAccountName'                                                        # AD/LDAP authenticaton (default=sAMAccountName).
@@ -126,6 +123,7 @@ otobo_my_character_set_server : 'utf8'
 #   otobo_ad_email        : 'adm_otrs@example.com'                                                  # E-mail address of the administrative account.
 #
 # Comment:
+#   Once otobo_ad_status is enabled you cannot login with root@localhost and you can only revert manual.
 #   For more information read:
 #     - file: tasks/ldap-configuration
 #     - url:  https://doc.otobo.org/manual/admin/stable/en/content/users-groups-roles/agents.html
