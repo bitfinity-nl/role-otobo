@@ -15,7 +15,7 @@
 #   otobo_version      : 'otrs-6.0.19'                                            # Version of OTOBO
 #   otobo_download_url : 'https://ftp.otrs.org/pub/otrs/{{ otrs_version }}.zip'   # Url where to download the resources.
 #   otobo_dest         : '/opt/otrs-workingdir/releases/{{ otrs_version }}/       # Destination to unarchive the resources.
-#   otobo_backups      : '/opt/otrs-workingdir/backups/'                          # Where to place the OTRS backups.
+#   otobo_backups      : '/opt/otrs-workingdir/backups/'                          # Where to place the OTRS backups. (WIP)
 #   otobo_email        : 'support@example.net'                                    # Set support mail address for Apache2.
 #   otobo_fqdn         : 'servicedesk.example.net'                                # Set fqdn from the site.
 #
@@ -130,7 +130,6 @@ otobo_ad_accessattr   : 'member'
 otobo_ad_userattr     : 'DN'
 otobo_ad_searchuserdn : 'CN=svc_otobo,OU=Service Accounts,OU=Users,{{ otobo_ad_basedn }}'
 otobo_ad_searchuserpw : 'Atyourserv1c3'
-
 otobo_ad_account      : 'adm_otobo'
 otobo_ad_firstname    : '{{ otobo_ad_account }}'
 otobo_ad_lastname     : '{{ otobo_ad_account }}'
