@@ -28,7 +28,6 @@
   replace:
      path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
      regexp: ^\$Self->{'AdminEmail'} =  '.*';$
-     # regexp: \$Self->{'AdminEmail'} =  'support@<OTOBO_CONFIG_FQDN>';
      replace: $Self->{'AdminEmail'} =  '{{ otobo_self_adminemail }}';
 
 - name: "Reconfigure default value Organization in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
