@@ -121,7 +121,7 @@
               # customer unique id
               CustomerKey => 'sAMAccountName',
               # customer #
-              CustomerID => 'mail',
+              CustomerID => 'company',
               CustomerUserListFields => ['cn', 'mail'],
               CustomerUserSearchFields => ['sAMAccountName', 'cn', 'mail'],
               CustomerUserSearchPrefix => '',
