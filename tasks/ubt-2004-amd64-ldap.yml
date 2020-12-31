@@ -87,7 +87,7 @@
           # -------------------------------------------------------------------------
          
           # Authentication module ldap settting.
-          $Self->{'Customer::AuthModule'} = 'Kernel::System::CustomerUser::LDAP';
+          #$Self->{'Customer::AuthModule'} = 'Kernel::System::CustomerUser::LDAP';
           $Self->{'Customer::AuthModule::LDAP::Host'} = '{{ otobo_ad_dc }}';
           $Self->{'Customer::AuthModule::LDAP::BaseDN'} = '{{ otobo_ad_basedn }}';
           $Self->{'Customer::AuthModule::LDAP::UID'} = '{{ otobo_ad_uid }}';
