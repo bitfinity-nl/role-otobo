@@ -97,9 +97,9 @@
           $Self->{'Customer::AuthModule::LDAP::SearchUserPw'} = '{{ otobo_ad_searchuserpw }}';
           
           # Check if the user is allowed to auth in a posixGroup.
-          #$Self->{'AuthModule::LDAP::GroupDN'} = '{{ otobo_ad_groupdn }}';
-          #$Self->{'AuthModule::LDAP::AccessAttr'} = 'member';
-          #$Self->{'AuthModule::LDAP::UserAttr'} = 'DN';
+          $Self->{'Customer::AuthModule::LDAP::GroupDN'} = '{{ otobo_ad_customer_groupdn }}';
+          $Self->{'Customer::AuthModule::LDAP::AccessAttr'} = 'member';
+          $Self->{'Customer::AuthModule::LDAP::UserAttr'} = 'DN';
 
           # Net::LDAP new params (if needed - for more info see perldoc Net::LDAP)
           $Self->{'Customer::AuthModule::LDAP::Params'} = {
