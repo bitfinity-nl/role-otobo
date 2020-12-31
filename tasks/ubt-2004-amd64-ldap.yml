@@ -82,6 +82,36 @@
           # -- End: LDAP-AD - Agent - Sync LDAP - Active Directory DB with OTOBO DB BACKEND --
           # ----------------------------------------------------------------------------------
 
+          # -------------------------------------------------------------------------
+          # -- Begin: LDAP-AD - Customer - Basic LDAP - Active Directory Auth BACKEND --
+          # -------------------------------------------------------------------------
+         
+          # Authentication module ldap settting.
+          $Self->{'Customer::AuthModule'} = 'Kernel::System::CustomerUser::LDAP';
+          $Self->{'Customer::AuthModule::LDAP::Host'} = '{{ otobo_ad_dc }}';
+          $Self->{'Customer::AuthModule::LDAP::BaseDN'} = '{{ otobo_ad_basedn }}';
+          $Self->{'Customer::AuthModule::LDAP::UID'} = '{{ otobo_ad_uid }}';
+
+          # Bind DN to LDAP-Active Directory for searching accounts.
+          $Self->{'Customer::AuthModule::LDAP::SearchUserDN'} = '{{ otobo_ad_searchuserdn }}';
+          $Self->{'Customer::AuthModule::LDAP::SearchUserPw'} = '{{ otobo_ad_searchuserpw }}';
+          
+          # Check if the user is allowed to auth in a posixGroup.
+          #$Self->{'AuthModule::LDAP::GroupDN'} = '{{ otobo_ad_groupdn }}';
+          #$Self->{'AuthModule::LDAP::AccessAttr'} = 'member';
+          #$Self->{'AuthModule::LDAP::UserAttr'} = 'DN';
+
+          # Net::LDAP new params (if needed - for more info see perldoc Net::LDAP)
+          $Self->{'Customer::AuthModule::LDAP::Params'} = {
+              port => 389,
+              timeout => 120,
+              async => 0,
+              version => 3,
+          };
+
+          # ------------------------------------------------------------------------
+          # -- Eind: LDAP-AD - Customer - Basic LDAP - Active Directory Auth BACKEND --
+          # ------------------------------------------------------------------------
 
           # ---------------------------------------------------------------------------------------
           # -- Begin: LDAP-AD - Customer - Sync LDAP - Active Directory DB with OTOBO DB BACKEND --
