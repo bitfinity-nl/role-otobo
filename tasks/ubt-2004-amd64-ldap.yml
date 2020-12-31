@@ -87,60 +87,78 @@
           # -- Begin: LDAP-AD - Customer - Sync LDAP - Active Directory DB with OTOBO DB BACKEND --
           # ---------------------------------------------------------------------------------------
 
+          # CustomerUser
           # (customer user ldap backend and settings)
-          $Self->{CustomerUser1} = {
-              Name => 'LDAP Data Source',
+          $Self->{CustomerUser} = {
+              Name => 'LDAP Backend',
               Module => 'Kernel::System::CustomerUser::LDAP',
               Params => {
-                   # Authentication module ldap settting.
-                   Host => '{{ otobo_ad_dc }}',
-                   BaseDN => '{{ otobo_ad_basedn }}',                  
-                   SSCOPE => 'sub',
-                   # Bind DN to LDAP-Active Directory for searching accounts.
-                   UserDN => '{{ otobo_ad_searchuserdn }}',
-                   UserPw => '{{ otobo_ad_searchuserpw }}',
-                   AlwaysFilter => '',
-                   #SourceCharset => 'utf-8',
-                   #DestCharset   => 'utf-8',
-                   Die => 0,
-                   # Net::LDAP new params (if needed - for more info see perldoc Net::LDAP)
-                   Params => {
-                        port => 389,
-                        timeout => 120,
-                        async => 0,
-                        version => 3,
-                   },
-               },
-               #ReadOnly => 1,
-               CustomerKey => 'sAMAccountName',
-               # Customer Settings.
-               CustomerID => 'mail',
-               CustomerUserListFields => ['cn', 'mail'],
-               CustomerUserSearchFields => ['cn', 'givenname', 'mail'],
-               CustomerUserSearchPrefix => '',
-               CustomerUserSearchSuffix => '*',
-               CustomerUserSearchListLimit => 250,
-               CustomerUserPostMasterSearchFields => ['mail'],
-               CustomerUserNameFields => ['givenname', 'sn'],
-               # show not own tickets in customer panel, CompanyTickets
-               CustomerUserExcludePrimaryCustomerID => 0,
-               AdminSetPreferences => 0,
-               #CacheTTL => 120,
-               Map => [
-                   # note: Login, Email and CustomerID are mandatory!
-                   # if you need additional attributes from AD, just map them here.
-                   # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly
-                   [ 'UserFirstname',  'Firstname',  'givenname',                  1, 1, 'var', '', 0 ],
-                   [ 'UserLastname',   'Lastname',   'sn',                         1, 1, 'var', '', 0 ],
-                   [ 'UserLogin',      'Username',   'sAMAccountName',             1, 1, 'var', '', 0 ],
-                   [ 'UserEmail',      'Email',      'mail',                       1, 1, 'var', '', 0 ],
-                   [ 'UserCustomerID', 'CustomerID', 'company',                    0, 1, 'var', '', 0 ],
-                   [ 'UserPhone',      'Phone',      'telephoneNumber',            1, 0, 'var', '', 0 ],
-                   [ 'UserMobile',     'Mobile',     'mobile',                     1, 0, 'var', '', 0 ],
-                   [ 'UserRoom',       'Room',       'physicalDeliveryOfficeName', 1, 0, 'var', '', 0 ],
-                   [ 'Department',     'Department', 'department',                 1, 0, 'var', '', 0 ],
+                  # ldap host
+                  Host => '{{ otobo_ad_dc }}',
+                  # ldap base dn
+                  BaseDN => '{{ otobo_ad_basedn }}',
+                  # search scope (one|sub)
+                  SSCOPE => 'sub',
+                  # The following is valid but would only be necessary if the
+                  # anonymous user does NOT have permission to read from the LDAP tree
+                  UserDN => '{{ otobo_ad_searchuserdn }}',
+                  UserPw => '{{ otobo_ad_searchuserpw }}',
+                  # in case you want to add always one filter to each ldap query, use
+                  # this option. e. g. AlwaysFilter => '(mail=*)' or AlwaysFilter => '(objectclass=user)'
+                  AlwaysFilter => '',
+                  # if the charset of your ldap server is iso-8859-1, use this:
+      #            # SourceCharset => 'iso-8859-1',
+                  # die if backend can't work, e. g. can't connect to server
+                  Die => 0,
+                  # Net::LDAP new params (if needed - for more info see perldoc Net::LDAP)
+                  Params => {
+                      port    => 389,
+                      timeout => 120,
+                      async   => 0,
+                      version => 3,
+                  },
+              },
+              # customer unique id
+              CustomerKey => 'sAMAccountName',
+              # customer #
+              CustomerID => 'mail',
+              CustomerUserListFields => ['cn', 'mail'],
+              CustomerUserSearchFields => ['sAMAccountName', 'cn', 'mail'],
+              CustomerUserSearchPrefix => '',
+              CustomerUserSearchSuffix => '*',
+              CustomerUserSearchListLimit => 250,
+              CustomerUserPostMasterSearchFields => ['mail'],
+              CustomerUserNameFields => ['givenname', 'sn'],
+              # Configures the character for joining customer user name parts. Join single space if it is not defined.
+              CustomerUserNameFieldsJoin => '',
+              # show customer user and customer tickets in the external interface
+              CustomerUserExcludePrimaryCustomerID => 0,
+              # add a ldap filter for valid users (expert setting)
+      #        # CustomerUserValidFilter => '(!(description=gesperrt))',
+              # admin can't change customer preferences
+              AdminSetPreferences => 0,
+              # cache time to live in sec. - cache any ldap queries
+      #        CacheTTL => 0,
+              Map => [
+                  # note: Login, Email and CustomerID needed!
+                  # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly, http-link-target, link class(es)
+                  [ 'UserTitle',       Translatable('Title or salutation'), 'title',               1, 0, 'var', '', 1, undef, undef ],
+                  [ 'UserFirstname',   Translatable('Firstname'),           'givenname',           1, 1, 'var', '', 1, undef, undef ],
+                  [ 'UserLastname',    Translatable('Lastname'),            'sn',                  1, 1, 'var', '', 1, undef, undef ],
+                  [ 'UserLogin',       Translatable('Username'),            'sAMAccountName',      1, 1, 'var', '', 1, undef, undef ],
+                  [ 'UserEmail',       Translatable('Email'),               'mail',                1, 1, 'var', '', 1, undef, undef ],
+                  [ 'UserCustomerID',  Translatable('CustomerID'),          'mail',                0, 1, 'var', '', 1, undef, undef ],
+                  # [ 'UserCustomerIDs', Translatable('CustomerIDs'),         'second_customer_ids', 1, 0, 'var', '', 1, undef, undef ],
+                  [ 'UserPhone',       Translatable('Phone'),               'telephonenumber',     1, 0, 'var', '', 1, undef, undef ],
+                  [ 'UserAddress',     Translatable('Address'),             'postaladdress',       1, 0, 'var', '', 1, undef, undef ],
+                  [ 'UserComment',     Translatable('Comment'),             'description',         1, 0, 'var', '', 1, undef, undef ],
 
-               ],
+                  # this is needed, if "SMIME::FetchFromCustomer" is active
+                  # [ 'UserSMIMECertificate', 'SMIMECertificate', 'userSMIMECertificate', 0, 1, 'var', '', 1, undef, undef ],
+
+                  # Dynamic field example
+                  # [ 'DynamicField_Name_X', undef, 'Name_X', 0, 0, 'dynamic_field', undef, 0, undef, undef ],
+              ],
           };
 
           # -------------------------------------------------------------------------------------
