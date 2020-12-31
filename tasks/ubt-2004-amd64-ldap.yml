@@ -105,7 +105,7 @@
                    Die => 0,
                    # Net::LDAP new params (if needed - for more info see perldoc Net::LDAP)
                    Params => {
-                        port => 3268,
+                        port => 389,
                         timeout => 120,
                         async => 0,
                         version => 3,
