@@ -34,7 +34,7 @@
           $Self->{'AuthModule::LDAP::SearchUserPw'} = '{{ otobo_ad_searchuserpw }}';
           
           # Check if the user is allowed to auth in a posixGroup.
-          $Self->{'AuthModule::LDAP::GroupDN'} = '{{ otobo_ad_groupdn }}';
+          $Self->{'AuthModule::LDAP::GroupDN'} = '{{ otobo_ad_groupdn_agent }}';
           $Self->{'AuthModule::LDAP::AccessAttr'} = 'member';
           $Self->{'AuthModule::LDAP::UserAttr'} = 'DN';
 
@@ -97,7 +97,7 @@
           $Self->{'Customer::AuthModule::LDAP::SearchUserPw'} = '{{ otobo_ad_searchuserpw }}';
           
           # Check if the user is allowed to auth in a posixGroup.
-          $Self->{'Customer::AuthModule::LDAP::GroupDN'} = '{{ otobo_ad_customer_groupdn }}';
+          $Self->{'Customer::AuthModule::LDAP::GroupDN'} = '{{ otobo_ad_groupdn_customer }}';
           $Self->{'Customer::AuthModule::LDAP::AccessAttr'} = 'member';
           $Self->{'Customer::AuthModule::LDAP::UserAttr'} = 'DN';
 
