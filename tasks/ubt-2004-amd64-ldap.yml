@@ -147,7 +147,7 @@
                   [ 'UserLastname',    Translatable('Lastname'),            'sn',                  1, 1, 'var', '', 1, undef, undef ],
                   [ 'UserLogin',       Translatable('Username'),            'sAMAccountName',      1, 1, 'var', '', 1, undef, undef ],
                   [ 'UserEmail',       Translatable('Email'),               'mail',                1, 1, 'var', '', 1, undef, undef ],
-                  [ 'UserCustomerID',  Translatable('CustomerID'),          'mail',                0, 1, 'var', '', 1, undef, undef ],
+                  [ 'UserCustomerID',  Translatable('CustomerID'),          'company',             0, 1, 'var', '', 1, undef, undef ],
                   # [ 'UserCustomerIDs', Translatable('CustomerIDs'),         'second_customer_ids', 1, 0, 'var', '', 1, undef, undef ],
                   [ 'UserPhone',       Translatable('Phone'),               'telephonenumber',     1, 0, 'var', '', 1, undef, undef ],
                   [ 'UserAddress',     Translatable('Address'),             'postaladdress',       1, 0, 'var', '', 1, undef, undef ],
