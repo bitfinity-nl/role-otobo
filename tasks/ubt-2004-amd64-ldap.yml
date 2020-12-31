@@ -134,7 +134,7 @@
                    [ 'UserLastname',   'Lastname',   'sn',                         1, 1, 'var', '', 0 ],
                    [ 'UserLogin',      'Username',   'sAMAccountName',             1, 1, 'var', '', 0 ],
                    [ 'UserEmail',      'Email',      'mail',                       1, 1, 'var', '', 0 ],
-                   [ 'UserCustomerID', 'CustomerID', 'department',                 0, 1, 'var', '', 0 ],
+                   [ 'UserCustomerID', 'CustomerID', 'company',                    0, 1, 'var', '', 0 ],
                    [ 'UserPhone',      'Phone',      'telephoneNumber',            1, 0, 'var', '', 0 ],
                    [ 'UserMobile',     'Mobile',     'mobile',                     1, 0, 'var', '', 0 ],
                    [ 'UserRoom',       'Room',       'physicalDeliveryOfficeName', 1, 0, 'var', '', 0 ],
