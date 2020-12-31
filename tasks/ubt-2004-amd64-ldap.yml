@@ -134,7 +134,7 @@
               # show customer user and customer tickets in the external interface
               CustomerUserExcludePrimaryCustomerID => 0,
               # add a ldap filter for valid users (expert setting)
-      #        # CustomerUserValidFilter => '(!(description=gesperrt))',
+              CustomerUserValidFilter => '(!(description=gesperrt))',
               # admin can't change customer preferences
               AdminSetPreferences => 0,
               # cache time to live in sec. - cache any ldap queries
