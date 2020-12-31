@@ -130,30 +130,6 @@
                    # note: Login, Email and CustomerID are mandatory!
                    # if you need additional attributes from AD, just map them here.
                    # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly
-<<<<<<< HEAD
-                   #[ 'UserFirstname',  'Firstname',  'givenname',                  1, 1, 'var', '', 0 ],
-                   #[ 'UserLastname',   'Lastname',   'sn',                         1, 1, 'var', '', 0 ],
-                   #[ 'UserLogin',      'Username',   'sAMAccountName',             1, 1, 'var', '', 0 ],
-                   #[ 'UserEmail',      'Email',      'mail',                       1, 1, 'var', '', 0 ],
-                   #[ 'UserCustomerID', 'CustomerID', 'company',                    0, 1, 'var', '', 0 ],
-                   #[ 'UserPhone',      'Phone',      'telephoneNumber',            1, 0, 'var', '', 0 ],
-                   #[ 'UserMobile',     'Mobile',     'mobile',                     1, 0, 'var', '', 0 ],
-                   #[ 'UserRoom',       'Room',       'physicalDeliveryOfficeName', 1, 0, 'var', '', 0 ],
-                   #[ 'Department',     'Department', 'department',                 1, 0, 'var', '', 0 ],
-                   [ 'UserTitle',       Translatable('Title or salutation'), 'title',                      1, 0, 'var', '', 1, undef, undef ],
-                   [ 'UserFirstname',   Translatable('Firstname'),           'givenname',                  1, 1, 'var', '', 1, undef, undef ],
-                   [ 'UserLastname',    Translatable('Lastname'),            'sn',                         1, 1, 'var', '', 1, undef, undef ],
-                   [ 'UserLogin',       Translatable('Username'),            'sAMAccountName',             1, 1, 'var', '', 1, undef, undef ],
-                   [ 'UserEmail',       Translatable('Email'),               'mail',                       1, 1, 'var', '', 1, undef, undef ],
-                   [ 'UserCustomerID',  Translatable('CustomerID'),          'company',                    0, 1, 'var', '', 1, undef, undef ],
-                   [ 'UserCustomerIDs', Translatable('CustomerIDs'),         'mail',                       1, 0, 'var', '', 1, undef, undef ],
-                   [ 'UserPhone',       Translatable('Phone'),               'telephonenumber',            1, 0, 'var', '', 1, undef, undef ],
-                   [ 'UserMobile',      Translatable('Mobile'),              'mobile',                     1, 0, 'var', '', 1, undef, undef ],
-                   [ 'UserRoom',        Translatable('Room'),                'physicalDeliveryOfficeName', 1, 0, 'var', '', 1, undef, undef ],
-                   [ 'Department',      Translatable('Department)',          'department',                 1, 0, 'var', '', 1, undef, undef ],
-                   [ 'UserAddress',     Translatable('Address'),             'postaladdress',              1, 0, 'var', '', 1, undef, undef ],
-                   [ 'UserComment',     Translatable('Comment'),             'description',                1, 0, 'var', '', 1, undef, undef ],                   
-=======
                    [ 'UserFirstname',  'Firstname',  'givenname',                  1, 1, 'var', '', 0 ],
                    [ 'UserLastname',   'Lastname',   'sn',                         1, 1, 'var', '', 0 ],
                    [ 'UserLogin',      'Username',   'sAMAccountName',             1, 1, 'var', '', 0 ],
@@ -163,7 +139,7 @@
                    [ 'UserMobile',     'Mobile',     'mobile',                     1, 0, 'var', '', 0 ],
                    [ 'UserRoom',       'Room',       'physicalDeliveryOfficeName', 1, 0, 'var', '', 0 ],
                    [ 'Department',     'Department', 'department',                 1, 0, 'var', '', 0 ],
->>>>>>> parent of e294e1d... Update ubt-2004-amd64-ldap.yml
+
                ],
           };
 
