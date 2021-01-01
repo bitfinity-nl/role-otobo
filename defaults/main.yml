@@ -40,7 +40,7 @@ otobo_backups       : '/opt/otobo-workingdir/backups/'
 #   otobo_root_password               : '123654'                    # Set default password for root@localhost (database auth only). 
 #
 otobo_self_systemid               : '24'
-otobo_self_httptype               : 'http'
+otobo_self_httptype               : 'https'
 otobo_self_adminemail             : '{{ otobo_email }}'
 otobo_self_organization           : 'Example Company'
 otobo_self_securemode             : '1'
