@@ -155,13 +155,13 @@
   import_tasks: ubt-2004-amd64-otobo-installer.yml
   when: result_zzzaauto.stat.exists == false
 
-- name: "Copy /opt/otobo/var/cron/otobo_daemon.dist to /opt/otobo/var/cron/otobo_daemon"
+- name: "Copy /opt/otobo/var/cron/*.dist to /opt/otobo/var/cron/ without .dist"
   copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     remote_src: yes
   with_items:
-    - { src: '/opt/otobo/var/cron/otobo_daemon.dist', dest: '/opt/otobo/var/cron/otobo.Daemon'}
+    - { src: '/opt/otobo/var/cron/otobo_daemon.dist', dest: '/opt/otobo/var/cron/otobo.daemon'}
     - { src: '/opt/otobo/var/cron/aaa_base.dist', dest: '/opt/otobo/var/cron/aaa_base'}
 
 - name: "Create directory/opt/otobo/var/tmp/"
