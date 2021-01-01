@@ -142,18 +142,18 @@
     rule: allow
     name: 'Apache Full'
 
-- name: "Check if configuration file /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm exists"
-  stat:
-    path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
-  register: result_zzzaauto
+#- name: "Check if configuration file /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm exists"
+#  stat:
+#    path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
+#  register: result_zzzaauto
 
-- name: "Display if configuration file /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm exists"
-  debug:
-    msg: "{{ result_zzzaauto.stat.exists }}"
+#- name: "Display if configuration file /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm exists"
+#  debug:
+#    msg: "{{ result_zzzaauto.stat.exists }}"
 
 - name: "Run the installer.pl playbook when ZZZAAuto.pm does not exists"
   import_tasks: ubt-2004-amd64-otobo-installer.yml
-  when: result_zzzaauto.stat.exists == false
+#  when: result_zzzaauto.stat.exists == false
 
 - name: "Copy /opt/otobo/var/cron/*.dist to /opt/otobo/var/cron/ without .dist"
   copy:
