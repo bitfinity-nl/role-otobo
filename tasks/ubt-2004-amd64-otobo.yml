@@ -128,8 +128,9 @@
     group: root
     mode: 0644
   with_items:
-    - { src: 'apache2-httpd-vhost-80.include.conf.j2', dest: '/etc/apache2/sites-available/zzz_otobo-80.conf'}
-    - { src: 'apache2-httpd-vhost-443.include.conf.j2', dest: '/etc/apache2/sites-available/zzz_otobo-443.conf'}
+    - { src: 'apache2-httpd-vhost-80.include.conf.j2', dest: '/etc/apache2/sites-available/zzz_otobo-80.conf' }
+    - { src: 'apache2-httpd-vhost-443.include.conf.j2', dest: '/etc/apache2/sites-available/zzz_otobo-443.conf' }
+    - { src: '.htaccess.j2', dest: '/var/www/html/.htaccess'}
   notify: restart_apache2
 
 - name: "Enable zzz_otobo-80.conf and zzz_otobo-443.conf"
