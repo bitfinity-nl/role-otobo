@@ -140,11 +140,9 @@
     marker_begin: "<Directory /var/www/>"
     marker_end: "</Directory>"
     block: |-
-      <Directory /var/www/>
               Options Indexes FollowSymLinks
               AllowOverride All
               Require all granted
-      </Directory>
     state: present
     backup: yes
 
