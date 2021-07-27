@@ -137,7 +137,7 @@
   ansible.builtin.replace:
     path: /etc/apache2/apache2.conf
     after: '^<Directory.\/var\/www\/>'
-    regexp: '^.*AllowOverride.None'
+    regexp: '        AllowOverride None'
     replace: '        AllowOverride All'
     backup: yes
 
