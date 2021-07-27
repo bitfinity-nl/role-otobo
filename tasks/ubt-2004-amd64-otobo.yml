@@ -134,11 +134,18 @@
   notify: restart_apache2
 
 - name: "Configure /etc/apache2/apache2.conf to use .htaccess"
-  ansible.builtin.replace:
+  blockinfile:
     path: /etc/apache2/apache2.conf
-    after: '^<Directory.*var.*www.*>'
-    regexp: '^.*AllowOverride None'
-    replace: '        AllowOverride All'
+    marker: "{mark}"
+    marker_begin: "<Directory /var/www/>"
+    marker_end: "</Directory>"
+    block: |-
+      <Directory /var/www/>
+              Options Indexes FollowSymLinks
+              AllowOverride All
+              Require all granted
+      </Directory>
+    state: present
     backup: yes
 
 - name: "Enable zzz_otobo-80.conf and zzz_otobo-443.conf"
