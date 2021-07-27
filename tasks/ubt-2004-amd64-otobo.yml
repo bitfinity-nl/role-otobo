@@ -135,7 +135,7 @@
 
 - name: "Configure /etc/apache2/apache2.conf to use .htaccess"
   ansible.builtin.replace:
-    path: /etc/apache2/sites-available/default.conf
+    path: /etc/apache2/apache2.conf
     after: '^<Directory.\/var\/www\/>'
     regexp: '^.*AllowOverride.None'
     replace: '        AllowOverride All'
