@@ -1,0 +1,35 @@
+---
+# Title: Docker version of OTOBO
+#
+# Author: Bitfinity / L. Rutten
+# Owner: Bitfinity / L. Rutten
+#
+# File: tasks/docker/dock-ubt-2004-amd64-otobo.yml
+#
+# Description:
+#   This taskfile contains the installation tasks
+#   of OTOBO via Docker. 
+#
+# Sources:
+#   - https://doc.otobo.org/manual/installation/10.1/en/content/installation-docker.html
+#
+
+- name: "Install Docker requirements via APT"
+  apt:
+    pkg:
+    - git
+    - docker
+    - docker-compose
+ 
+ - name: "Enable and start systemd service docker"
+   systemd:
+     enabled: yes
+     state: started
+     daemon_reload: yes
+     name: docker
+  
+- name: "Clone the otobo-docker repo" 
+  ansible.builtin.git:
+    repo: 'https://github.com/RotherOSS/otobo-docker.git'
+    dest: /opt
+    version: release-0.22
