@@ -32,4 +32,6 @@
   ansible.builtin.git:
     repo: 'https://github.com/RotherOSS/otobo-docker.git'
     dest: /opt
-    version: release-0.22
+    single_branch: yes
+    version: "{{ dock_branch }}"
+
