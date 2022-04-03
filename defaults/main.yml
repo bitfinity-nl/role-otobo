@@ -12,11 +12,13 @@
 # -- OTOBO settings --
 #
 # Variable(s):
+#   otobo_install_type : 'traditional'                                            # Installation Type 'traditional' or 'docker'.
 #   otobo_version      : 'otobo-latest-10.0'                                      # Version of OTOBO
 #   otobo_download_url : 'https://ftp.otrs.org/pub/otrs/{{ otrs_version }}.zip'   # Url where to download the resources.
 #   otobo_dest         : '/opt/otobo/                                             # Destination to unarchive the resources.
 #   otobo_backups      : '/opt/otobo-workingdir/backups/'                         # Where to place the OTRS backups. (WIP)
 #
+otobo_install_type  : 'traditional'
 otobo_version       : 'otobo-latest-10.0'
 otobo_download_url  : 'https://ftp.otobo.org/pub/otobo/{{ otobo_version }}.tar.gz'
 otobo_dest          : '/opt/otobo/'
