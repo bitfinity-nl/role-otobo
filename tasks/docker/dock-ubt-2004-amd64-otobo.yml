@@ -33,5 +33,5 @@
     repo: 'https://github.com/RotherOSS/otobo-docker.git'
     dest: /opt
     single_branch: yes
-    version: "{{ dock_branch }}"
+    version: "{{ otobo_dock_branch }}"
 
