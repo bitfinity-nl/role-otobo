@@ -37,4 +37,3 @@
     - otobo_install_type == 'docker'
     - ansible_distribution_version == '20.04'
     - ansible_architecture == 'x86_64'
-    - otobo_ad_status == 'enabled'
