@@ -18,12 +18,15 @@
 #   otobo_dest         : '/opt/otobo/                                             # Destination to unarchive the resources.
 #   otobo_backups      : '/opt/otobo-workingdir/backups/'                         # Where to place the OTRS backups. (WIP)
 #
+#   otobo_dock_branch  : ''                                                       # Otobo Docker Git branch.
+#
 otobo_install_type  : 'traditional'
 otobo_version       : 'otobo-latest-10.0'
 otobo_download_url  : 'https://ftp.otobo.org/pub/otobo/{{ otobo_version }}.tar.gz'
 otobo_dest          : '/opt/otobo/'
 otobo_backups       : '/opt/otobo-workingdir/backups/'
 
+dock_branch         : 'rel-10_1'
 
 # - OTOBO Installer.pl settings --
 # 
