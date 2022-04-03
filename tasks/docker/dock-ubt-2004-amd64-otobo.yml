@@ -21,12 +21,12 @@
     - docker
     - docker-compose
  
- - name: "Enable and start systemd service docker"
-   systemd:
-     enabled: yes
-     state: started
-     daemon_reload: yes
-     name: docker
+- name: "Enable and start systemd service docker"
+  systemd:
+    enabled: yes
+    state: started
+    daemon_reload: yes
+    name: docker
   
 - name: "Clone the otobo-docker repo" 
   ansible.builtin.git:
