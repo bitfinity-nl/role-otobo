@@ -88,11 +88,14 @@
 #    state: absent
 #    name: mpm_worker
 
-- name: "Enable Apache2 module mpm_prefork"
-  apache2_module:
-    state: present
-    name: mpm_prefork
-    
+#- name: "Enable Apache2 module mpm_prefork"
+#  apache2_module:
+#    state: present
+#    name: mpm_prefork
+ 
+- name: "Change module mpm_worker to mpm_prefork"
+  command: a2dismod mpm_worker ; a2enmod mpm_prefork
+
 - name: "restart Apache2"
   systemd:
     state: restarted
