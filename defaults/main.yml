@@ -28,7 +28,7 @@ otobo_backups       : '/opt/otobo-workingdir/backups/'
 
 otobo_dock_branch   : 'rel-10_1'
 otobo_dock_env      :
-   - { find: 'OTOBO_DB_ROOT_PASSWORD=', replace: '', desc: 'Database password' }
+   - { find: 'OTOBO_DB_ROOT_PASSWORD=', replace: 'password', desc: 'Database password' }
                       
                       
 # - OTOBO Installer.pl settings --
