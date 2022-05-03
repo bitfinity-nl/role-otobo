@@ -31,7 +31,7 @@
 - name: "Clone the otobo-docker repo" 
   ansible.builtin.git:
     repo: 'https://github.com/RotherOSS/otobo-docker.git'
-    dest: /opt/git/otobo
+    dest: /opt/otobo-docker
     #single_branch: yes
     version: "{{ otobo_dock_branch }}"
 
