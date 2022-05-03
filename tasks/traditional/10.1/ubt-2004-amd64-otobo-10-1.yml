@@ -61,8 +61,8 @@
 
 - name: "Disable Apache2 modules"
   apache2_module:
-    state: "{{ item }}"
-    name: absent
+    state: absent
+    name: "{{ item }}"
   with_items:
     - mpm_event
     - mpm_worker
