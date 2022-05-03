@@ -91,10 +91,15 @@
     
 - name: "Create directory structure"
   file:
-    path: "{{ item }}"
-    state: directory
-  with_items:
-    - "{{ otobo_dest }}"
+    src: "/opt/{{ otobo_version }}"
+    dest: /opt/otobo
+    state: link
+    
+  #file:
+  #  path: "{{ item }}"
+  #  state: directory
+  #with_items:
+  #  - "{{ otobo_dest }}"
 
 - name: "Download sources from OTOBO"
   unarchive: 
