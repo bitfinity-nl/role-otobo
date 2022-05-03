@@ -99,7 +99,8 @@
 - name: "Download sources from OTOBO"
   unarchive: 
     src: "{{ otobo_download_url }}"
-    dest: "{{ otobo_version }}"
+    dest: "/opt"
+    #dest: "{{ otobo_version }}"
     #extra_opts: [--strip-components=1]
     remote_src: yes
 
