@@ -47,6 +47,17 @@
     - libio-socket-ssl-perl
     - libdbd-mysql-perl
     - libmoo-perl
+    # For Otobo 10.1
+    - libcgi-psgi-perl
+    - libdbix-connector-perl
+    - libfile-chmod-perl
+    - liblist-allutils-perl
+    - libpath-class-perl
+    - libtext-trim-perl
+    - libplack-perl
+    - libplack-middleware-header-perl
+    - libplack-middleware-reverseproxy-perl
+    - libconst-fast-perl
 
 - name: "Enable Apache modules"
   apache2_module:
