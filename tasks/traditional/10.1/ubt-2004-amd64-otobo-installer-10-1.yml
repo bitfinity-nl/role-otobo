@@ -1,0 +1,89 @@
+---
+# Title: OTOBO Ticket system
+#
+# Authtor: bitfinity-nl
+# File: tasks/traditional/ubt-2004-amd64-otobo-installer.yml
+#
+# Description:
+#   OTOBO is the new free Open Source ticket system 
+#   with strong functionality AND a great look.
+
+- name: "Generate /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
+  raw: sudo su - otobo -c "/opt/otobo/bin/otobo.Console.pl Maint::Config::Rebuild" 
+  ignore_errors: yes
+
+- name: "Reconfigure default value for SystemID in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
+  replace:
+     path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
+     regexp: ^\$Self->{'SystemID'} =  '.*';$
+     replace: $Self->{'SystemID'} =  '{{ otobo_self_systemid }}';
+
+- name: "Reconfigure default value for HttpType in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
+  replace:
+     path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
+     regexp: ^\$Self->{'HttpType'} =  '.*';$
+     replace: $Self->{'HttpType'} =  '{{ otobo_self_httptype }}';
+     
+- name: "Reconfigure default value AdminEmail in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
+  replace:
+     path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
+     regexp: ^\$Self->{'AdminEmail'} =  '.*';$
+     replace: $Self->{'AdminEmail'} =  '{{ otobo_self_adminemail }}';
+
+- name: "Reconfigure default value Organization in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
+  replace:
+     path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
+     regexp: ^\$Self->{'Organization'} =  '.*';$
+     replace: $Self->{'Organization'} =  '{{ otobo_self_organization }}';
+
+#-- Installer - Configure then SendmailModule --
+- name: "Reconfigure default value SendmailModule in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
+  replace:
+     path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
+     regexp: ^\$Self->{'SendmailModule'} =  'Kernel::System::Email::.*';$
+     replace: $Self->{'SendmailModule'} =  'Kernel::System::Email::{{ otobo_sendmailmodule }}';
+
+- name: "Reconfigure default value SendmailModule AuthPassword in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
+  lineinfile:
+     path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
+     regexp: ^\$Self->{'SendmailModule::AuthPassword'} =  '.*';$
+     line: $Self->{'SendmailModule::AuthPassword'} =  '{{ otobo_sendmailmodule_authpassword }}';
+     insertafter: \$Self->{'SendmailModule::Host'} =  '.*';
+
+- name: "Reconfigure default value SendmailModule AuthUser in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
+  lineinfile:
+     path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
+     regexp: ^\$Self->{'SendmailModule::AuthUser'} =  '.*';$
+     line: $Self->{'SendmailModule::AuthUser'} =  '{{ otobo_sendmailmodule_authuser }}';
+     insertafter: \$Self->{'SendmailModule::Host'} =  '.*';
+     
+- name: "Reconfigure default value SendmailModule CMD in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
+  replace:
+     path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
+     regexp: ^\$Self->{'SendmailModule::CMD'} =  '.*';$
+     replace: $Self->{'SendmailModule::CMD'} =  '{{ otobo_sendmailmodule_cmd }}';
+
+- name: "Reconfigure default value SendmailModule Port in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
+  lineinfile:
+     path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
+     regexp: \$Self->{'SendmailModule::Port'} =  '.*';
+     line: $Self->{'SendmailModule::Port'} =  '{{ otobo_sendmailmodule_port }}';
+     insertafter: \$Self->{'SendmailModule::Host'} =  '.*';
+
+- name: "Reconfigure default value SendmailModule Host in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
+  lineinfile:
+     path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
+     regexp: ^\$Self->{'SendmailModule::Host'} =  '.*';$
+     line: $Self->{'SendmailModule::Host'} =  '{{ otobo_sendmailmodule_host }}';
+
+#--
+
+- name: "Reconfigure default value Securemode in /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm"
+  replace:
+     path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
+     regexp: ^\$Self->{'SecureMode'} =  .*;$
+     replace: $Self->{'SecureMode'} =  {{ otobo_self_securemode }};
+     
+- name: "Set password for root@localhost"
+  raw: sudo su - otobo -c "/opt/otobo/bin/otobo.Console.pl Admin::User::SetPassword root@localhost {{ otobo_root_password }}" 
+  ignore_errors: yes
