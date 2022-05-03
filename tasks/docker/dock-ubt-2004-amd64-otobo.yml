@@ -34,4 +34,21 @@
     dest: /opt/otobo-docker
     #single_branch: yes
     version: "{{ otobo_dock_branch }}"
+    
+- name: "Copy /opt/otobo-docker.docker_compose_env_https to /opt/otobo-docker.env"     
+  ansible.builtin.copy:
+    src: /opt/otobo-docker/.docker_compose_env_https
+    dest: /opt/otobo-docker/.env
+    remote_src: yes 
 
+- name: "Configure /opt/otobo-docker/.env"
+  lineinfile:
+    path:  /opt/otobo-docker/.env
+    search_string: "{{ item.find }}"
+    line: "{{ item.replace }}"
+    owner: root
+    group: root
+    mode: '0644'
+  with_items: {{}}
+    - { find: 'OTOBO_DB_ROOT_PASSWORD=', replace: '', desc: 'Database password' }
+    
