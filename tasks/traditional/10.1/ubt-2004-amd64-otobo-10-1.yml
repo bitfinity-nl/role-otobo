@@ -58,6 +58,15 @@
     - libplack-middleware-header-perl
     - libplack-middleware-reverseproxy-perl
     - libconst-fast-perl
+
+- name: "Disable Apache2 modules"
+  apache2_module:
+    state: absent
+    name: "{{ item }}"
+  with_items:
+    - mpm_event
+    - mpm_worker
+  #ignore_errors: yes
   
 - name: "Enable Apache modules"
   apache2_module:
@@ -74,15 +83,6 @@
     - proxy_wstunnel
     - ssl
     - mpm_prefork
-
-- name: "Disable Apache2 modules"
-  apache2_module:
-    state: absent
-    name: "{{ item }}"
-  with_items:
-    - mpm_event
-    - mpm_worker
-  ignore_errors: yes
   
 - name: "restart Apache2"
   systemd:
