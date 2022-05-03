@@ -66,7 +66,8 @@
   with_items:
     - mpm_event
     - mpm_worker
-
+  ignore_errors: yes
+  
 - name: "Enable Apache modules"
   apache2_module:
     state: present
@@ -82,7 +83,6 @@
     - proxy_wstunnel
     - ssl
     - mpm_prefork
-  ignore_errors: yes
 
 - name: "restart Apache2"
   systemd:
