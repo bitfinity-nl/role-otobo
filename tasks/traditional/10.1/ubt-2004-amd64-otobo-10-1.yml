@@ -65,7 +65,7 @@
     name: "{{ item }}"
   with_items:
     - mpm_event
-    - mpm_worker
+    #- mpm_worker
   #ignore_errors: yes
   
 - name: "Enable Apache modules"
