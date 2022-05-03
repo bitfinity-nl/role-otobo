@@ -82,12 +82,16 @@
     - proxy_http
     - proxy_wstunnel
     - ssl
-    - mpm_prefork
 
-- name: "Disable Apache2 modules"
+- name: "Disable Apache2 modules mpm_worker"
   apache2_module:
     state: absent
     name: mpm_worker
+
+- name: "Enable Apache2 module mpm_prefork"
+  apache2_module:
+    state: present
+    name: mpm_prefork
     
 - name: "restart Apache2"
   systemd:
