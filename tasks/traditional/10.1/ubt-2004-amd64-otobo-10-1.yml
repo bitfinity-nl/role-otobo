@@ -59,6 +59,15 @@
     - libplack-middleware-reverseproxy-perl
     - libconst-fast-perl
 
+- name: "Disable Apache2 modules"
+  apache2_module:
+    state: "{{ item }}"
+    name: absent
+  with_items:
+    - mpm_event
+    - mpm_worker
+  notify: restart_apache2
+
 - name: "Enable Apache modules"
   apache2_module:
     state: present
@@ -73,21 +82,10 @@
     - proxy_http
     - proxy_wstunnel
     - ssl
+    - mpm_prefork
   notify: restart_apache2
 
-- name: "Disable & Enable Apache2 modules"
-  community.general.apache2_module:
-    state: "{{ item.state }}"
-    name: "{{ item.name }}"
-  with_items:
-    - { state: 'absent', name: 'mpm_event' }
-    - { state: 'absent', name: 'mpm_worker' }
-    - { state: 'present', name: 'mpm_prefork' }
-    - { state: 'present', name: 'perl' }
-    - { state: 'present', name: 'deflate' }
-    - { state: 'present', name: 'filter' }
-    - { state: 'present', name: 'headers' }
-        
+
 - name: "Create directory structure"
   file:
     path: "{{ item }}"
@@ -180,14 +178,14 @@
     rule: allow
     name: 'Apache Full'
 
-- name: "Check if configuration file /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm exists"
-  stat:
-    path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
-  register: result_zzzaauto
+#- name: "Check if configuration file /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm exists"
+#  stat:
+#    path: /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm
+#  register: result_zzzaauto
 
-- name: "Display if configuration file /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm exists"
-  debug:
-    msg: "{{ result_zzzaauto.stat.exists }}"
+#- name: "Display if configuration file /opt/otobo/Kernel/Config/Files/ZZZAAuto.pm exists"
+#  debug:
+#    msg: "{{ result_zzzaauto.stat.exists }}"
 
 #- name: "Run the installer.pl playbook when ZZZAAuto.pm does not exists"
 #  import_tasks: ubt-2004-amd64-otobo-installer.yml
