@@ -75,6 +75,19 @@
     - ssl
   notify: restart_apache2
 
+- name: "Disable & Enable Apache2 modules"
+  community.general.apache2_module:
+    state: "{{ item.state }}"
+    name: "{{ item.name }}"
+  with_items:
+    - { state: 'absent', name: 'mpm_event' }
+    - { state: 'absent', name: 'mpm_worker' }
+    - { state: 'present', name: 'mpm_prefork' }
+    - { state: 'present', name: 'perl' }
+    - { state: 'present', name: 'deflate' }
+    - { state: 'present', name: 'filter' }
+    - { state: 'present', name: 'headers' }
+        
 - name: "Create directory structure"
   file:
     path: "{{ item }}"
