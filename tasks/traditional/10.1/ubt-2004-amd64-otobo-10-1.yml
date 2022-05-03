@@ -99,8 +99,8 @@
 - name: "Download sources from OTOBO"
   unarchive: 
     src: "{{ otobo_download_url }}"
-    dest: "{{ otobo_dest }}"
-    #extra_opts: [--strip-components=1]
+    dest: "{{ otobo_version }}"
+    extra_opts: [--strip-components=1]
     remote_src: yes
 
 - name: "Type:mariadb, For OS: Ubuntu 20.04LTS, Arch: amd64, State: Enabled"
