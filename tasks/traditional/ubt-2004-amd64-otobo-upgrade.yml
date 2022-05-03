@@ -1,0 +1,30 @@
+---
+# Title: OTOBO Ticket system (WIP)
+#
+# Authtor: bitfinity-nl
+# File: tasks/traditional/ubt-2004-amd64-otobo-upgrade.yml
+#
+# Description:
+#   OTOBO is the new free Open Source ticket system 
+#   with strong functionality AND a great look.
+#
+# Source(s):
+#   - https://ftp.otobo.org/pub/otobo/
+#   - https://doc.otobo.org/manual/installation/10.1/de/content/updating.html
+
+- name: "Stop all relevant systemd services"
+  ansible.builtin.systemd:
+    state: stopped
+    name: "{{ item }}"
+  with_items:
+    - postfix
+    - apache2
+    - cron
+ 
+- name: "Stop all OTOBO deamons & cron"
+  raw: "{{ item }}"
+  with_items:
+    -  sudo su - otobo -c "/opt/otobo/bin/otobo.Daemon.pl stop"
+    -  sudo su - otobo -c "/opt/otobo/bin/Cron.sh stop"
+
+- name: "Backup installation "
