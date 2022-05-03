@@ -16,8 +16,15 @@
     - ansible_architecture == 'x86_64'
     #- ansible_memtotal_mb >= "7961"
 
-- name: "Type:otobo, For OS: Ubuntu 20.04LTS, Arch: amd64, State: Enabled"
-  import_tasks: traditional/ubt-2004-amd64-otobo.yml
+#- name: "Type:otobo-10.0, For OS: Ubuntu 20.04LTS, Arch: amd64, State: Enabled"
+#  import_tasks: traditional/ubt-2004-amd64-otobo.yml
+#  when:
+#    - otobo_install_type == 'traditional'
+#    - ansible_distribution_version == '20.04'
+#    - ansible_architecture == 'x86_64'
+
+- name: "Type:otobo-10.1, For OS: Ubuntu 20.04LTS, Arch: amd64, State: Enabled"
+  import_tasks: traditional/ubt-2004-amd64-otobo-10-1.yml
   when:
     - otobo_install_type == 'traditional'
     - ansible_distribution_version == '20.04'
@@ -37,3 +44,5 @@
     - otobo_install_type == 'docker'
     - ansible_distribution_version == '20.04'
     - ansible_architecture == 'x86_64'
+
+
