@@ -88,18 +88,6 @@
   systemd:
     state: restarted
     name: apache2
-    
-- name: "Create directory structure"
-  file:
-    src: "/opt/{{ otobo_version }}"
-    dest: /opt/otobo
-    state: link
-    
-  #file:
-  #  path: "{{ item }}"
-  #  state: directory
-  #with_items:
-  #  - "{{ otobo_dest }}"
 
 - name: "Download sources from OTOBO"
   unarchive: 
@@ -109,6 +97,12 @@
     #extra_opts: [--strip-components=1]
     remote_src: yes
 
+- name: "Create directory structure"
+  file:
+    src: "/opt/{{ otobo_version }}"
+    dest: /opt/otobo
+    state: link
+    
 - name: "Type:mariadb, For OS: Ubuntu 20.04LTS, Arch: amd64, State: Enabled"
   import_tasks: ../ubt-2004-amd64-mariadb.yml
 
