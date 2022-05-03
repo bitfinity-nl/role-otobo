@@ -82,6 +82,7 @@
     - proxy_wstunnel
     - ssl
     - mpm_prefork
+  ignore_errors: yes
 
 - name: "restart Apache2"
   systemd:
