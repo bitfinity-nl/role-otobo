@@ -83,12 +83,20 @@
     - proxy_wstunnel
     - ssl
     - mpm_prefork
-  
+
+- name: "Disable Apache2 modules"
+  apache2_module:
+    state: absent
+    name: mpm_worker
+    
 - name: "restart Apache2"
   systemd:
     state: restarted
     name: apache2
 
+
+
+    
 - name: "Create directory structure"
   file:
     path: "{{ item }}"
