@@ -49,6 +49,5 @@
     owner: root
     group: root
     mode: '0644'
-  with_items: {{}}
-    - { find: 'OTOBO_DB_ROOT_PASSWORD=', replace: '', desc: 'Database password' }
+  with_items: "{{ otobo_doc_env }}"
     
