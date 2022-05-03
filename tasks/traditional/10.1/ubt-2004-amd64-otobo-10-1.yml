@@ -73,7 +73,7 @@
     - proxy_http
     - proxy_wstunnel
     - ssl
-    #- mpm_prefork
+    - mpm_prefork
 
 - name: "Disable Apache2 modules"
   apache2_module:
