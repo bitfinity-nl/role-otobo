@@ -12,13 +12,13 @@
 <VirtualHost *:443>
 
     # Please change here the otobo admin mail address
-    ServerAdmin mail@otobo.de
+    ServerAdmin {{ otobo_self_adminemail }}
 
     # Please change here the FQDN or hostname, you like to use with OTOBO
-    ServerName helpdesk.otobo.de
+    ServerName {{ otobo_ServerName }}
 
     # Please change here and add more different FQDN´s or hostnames, you like to use with OTOBO
-    ServerAlias www.helpdesk.otobo.de
+    ServerAlias {{ otobo_ServerAlias }}
 
     HostnameLookups Off
     UseCanonicalName Off
@@ -30,13 +30,13 @@
         SSLEngine on
 
         # Please add the path to the ssl cert
-        SSLCertificateFile /etc/ssl/certs/otobo.de.cert
+        SSLCertificateFile {{ otobo_SSLCertificateFile }}
 
         # Please add the path to the ssl key
-        SSLCertificateKeyFile /etc/ssl/private/otobo.de.nopass.key
+        SSLCertificateKeyFile {{ otobo_SSLCertificateKeyFile }}
 
         # Please add the path to the ssl chain file (Download from used ssl cert publisher)
-        SSLCertificateChainFile /etc/ssl/certs/linux_intermediate_otobo.ch.pem
+        SSLCertificateChainFile {{ otobo_SSLCertificateChainFile }}
 
     </IfModule>
 
