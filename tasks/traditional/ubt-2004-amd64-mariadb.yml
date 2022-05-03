@@ -41,18 +41,18 @@
   debug:
     msg: "{{ otobo_db_state }}"
 
-- name: "Import databases"
-  mysql_db:
-    state: import
-    name: "{{ otobo_db_name }}"
-    target: "{{ item }}"
-    login_user: "{{ otobo_sys_user }}"
-    login_password: "{{ otobo_sys_pass }}"
-  with_items:
-    - /opt/otobo/scripts/database/otobo-schema.mysql.sql
-    - /opt/otobo/scripts/database/otobo-initial_insert.mysql.sql
-    - /opt/otobo/scripts/database/otobo-schema-post.mysql.sql
-  when: otobo_db_state.changed == true
-  notify:
-    - restart_mariadb
-    - restart_apache2
+#- name: "Import databases"
+#  mysql_db:
+#    state: import
+#    name: "{{ otobo_db_name }}"
+#    target: "{{ item }}"
+#    login_user: "{{ otobo_sys_user }}"
+#    login_password: "{{ otobo_sys_pass }}"
+#  with_items:
+#    - /opt/otobo/scripts/database/otobo-schema.mysql.sql
+#    - /opt/otobo/scripts/database/otobo-initial_insert.mysql.sql
+#    - /opt/otobo/scripts/database/otobo-schema-post.mysql.sql
+#  when: otobo_db_state.changed == true
+#  notify:
+#    - restart_mariadb
+#    - restart_apache2
