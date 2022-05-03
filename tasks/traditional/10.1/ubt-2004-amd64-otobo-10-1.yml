@@ -80,18 +80,6 @@
     name: "{{ item }}"
   with_items:
     - mpm_event
-    #- mpm_worker
-  #ignore_errors: yes
-
-#- name: "Disable Apache2 modules mpm_worker"
-#  apache2_module:
-#    state: absent
-#    name: mpm_worker
-
-#- name: "Enable Apache2 module mpm_prefork"
-#  apache2_module:
-#    state: present
-#    name: mpm_prefork
  
 - name: "Change module mpm_worker to mpm_prefork"
   raw: a2dismod mpm_worker ; a2enmod mpm_prefork
@@ -100,9 +88,6 @@
   systemd:
     state: restarted
     name: apache2
-
-
-
     
 - name: "Create directory structure"
   file:
@@ -110,11 +95,6 @@
     state: directory
   with_items:
     - "{{ otobo_dest }}"
-
-#- name: "Dowload sources from GIT"
-#  git:
-#    repo: https://github.com/OTRS/otrs.git
-#    dest: "/opt/otrs"
 
 - name: "Download sources from OTOBO"
   unarchive: 
