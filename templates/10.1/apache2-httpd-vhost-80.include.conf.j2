@@ -11,17 +11,17 @@
 # Please change here * to the server IP-address
 <VirtualHost *:80>
     # Please change here the otobo admin mail address
-    ServerAdmin mail@otobo.de
+    ServerAdmin {{ otobo_self_adminemail }}
 
     # Please change here the FQDN or hostname, you like to use with OTOBO
-    ServerName community.otobo.de
+    ServerName {{ otobo_ServerName }}
 
     # Please change here and add more different FQDN´s or hostnames, you like to use with OTOBO
-    ServerAlias www.helpdesk.otobo.de
+    ServerAlias {{ otobo_ServerAlias }}
     HostnameLookups Off
     UseCanonicalName Off
     ServerSignature Off
 
     # Please change here the redirect to https and add your FQDN or hostname
-    Redirect permanent / https://community.otobo.de/
+    Redirect permanent / https://{{ otobo_ServerAlias }}/
 </VirtualHost>
