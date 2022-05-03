@@ -66,7 +66,6 @@
   with_items:
     - mpm_event
     - mpm_worker
-  notify: restart_apache2
 
 - name: "Enable Apache modules"
   apache2_module:
@@ -83,8 +82,11 @@
     - proxy_wstunnel
     - ssl
     - mpm_prefork
-  notify: restart_apache2
 
+- name: "restart Apache2"
+  systemd:
+    state: restarted
+    name: apache2
 
 - name: "Create directory structure"
   file:
