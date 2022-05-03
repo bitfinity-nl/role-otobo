@@ -176,9 +176,9 @@
   debug:
     msg: "{{ result_zzzaauto.stat.exists }}"
 
-- name: "Run the installer.pl playbook when ZZZAAuto.pm does not exists"
-  import_tasks: ubt-2004-amd64-otobo-installer.yml
-  when: result_zzzaauto.stat.exists == false
+#- name: "Run the installer.pl playbook when ZZZAAuto.pm does not exists"
+#  import_tasks: ubt-2004-amd64-otobo-installer.yml
+#  when: result_zzzaauto.stat.exists == false
 
 - name: "Copy /opt/otobo/var/cron/*.dist to /opt/otobo/var/cron/ without .dist"
   copy:
