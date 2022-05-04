@@ -100,7 +100,7 @@
 - name: "Create directory structure"
   file:
     src: "/opt/{{ otobo_version }}/"
-    dest: /opt/otobo2/
+    dest: /opt/otobo2
     state: link
     force: yes
     
