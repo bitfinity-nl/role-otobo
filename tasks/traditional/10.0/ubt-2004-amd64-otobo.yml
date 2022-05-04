@@ -47,17 +47,6 @@
     - libio-socket-ssl-perl
     - libdbd-mysql-perl
     - libmoo-perl
-    # For Otobo 10.1
-    - libcgi-psgi-perl
-    - libdbix-connector-perl
-    - libfile-chmod-perl
-    - liblist-allutils-perl
-    - libpath-class-perl
-    - libtext-trim-perl
-    - libplack-perl
-    - libplack-middleware-header-perl
-    - libplack-middleware-reverseproxy-perl
-    - libconst-fast-perl
 
 - name: "Enable Apache modules"
   apache2_module:
@@ -81,11 +70,6 @@
     state: directory
   with_items:
     - "{{ otobo_dest }}"
-
-#- name: "Dowload sources from GIT"
-#  git:
-#    repo: https://github.com/OTRS/otrs.git
-#    dest: "/opt/otrs"
 
 - name: "Download sources from OTOBO"
   unarchive: 
@@ -121,7 +105,6 @@
     - { src: 'Config.pm.dist.j2', dest: '/opt/otobo/Kernel/Config.pm' }
 
 - name: "Set OTOBO file permissions"
-#  shell: /opt/otobo/bin/otobo.SetPermissions.pl --web-group=www-data
   shell: /opt/otobo/bin/otobo.SetPermissions.pl
 
 - name: "Create symlink from {{ otobo_dest }} to /opt/otobo"
