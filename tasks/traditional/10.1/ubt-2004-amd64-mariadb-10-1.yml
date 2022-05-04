@@ -1,0 +1,57 @@
+---
+# Title: OTOBO Ticket system
+#
+# Authtor: bitfinity-nl
+# File: defaults/traditional/ubt-2004-amd64-mariadb-10-1.yml
+#
+# Description:
+#   OTOBO is the new free Open Source ticket system 
+#   with strong functionality AND a great look.
+
+- name: "Tuning MariaDB server"
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - { src: 'my.cnf.j2', dest: '/etc/mysql/my.cnf'}
+  notify: restart_mariadb
+
+- name: "Create OTOBO database"
+  mysql_db:
+    name: "{{ otobo_db_name }}"
+    encoding: utf8
+    state: present
+    login_user: "{{ otobo_sys_user }}"
+    login_password: "{{ otobo_sys_pass }}"
+  register: otobo_db_state
+
+- name: "Create user {{ otobo_db_user }} and grant all privileges on MySQL database {{ otobo_db_name }}"
+  mysql_user:
+    name: "{{ otobo_db_user }}"
+    password: "{{ otobo_db_pass }}"
+    priv: "{{ otobo_db_name }}.*:ALL,GRANT"
+    state: present
+    login_user: "{{ otobo_sys_user }}"
+    login_password: "{{ otobo_sys_pass }}"
+
+- name: "Display database"
+  debug:
+    msg: "{{ otobo_db_state }}"
+
+- name: "Import databases"
+  mysql_db:
+    state: import
+    name: "{{ otobo_db_name }}"
+    target: "{{ item }}"
+    login_user: "{{ otobo_sys_user }}"
+    login_password: "{{ otobo_sys_pass }}"
+  with_items:
+    - /opt/otobo/scripts/database/otobo-schema.xml
+    - /opt/otobo/scripts/database/otobo-initial_insert.xml
+  when: otobo_db_state.changed == true
+  notify:
+    - restart_mariadb
+    - restart_apache2
