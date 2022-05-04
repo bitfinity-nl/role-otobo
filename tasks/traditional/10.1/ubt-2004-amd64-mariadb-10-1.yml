@@ -51,7 +51,7 @@
   with_items:
     - /opt/otobo/scripts/database/otobo-schema.xml
     - /opt/otobo/scripts/database/otobo-initial_insert.xml
-  when: otobo_db_state.changed == true
+#  when: otobo_db_state.changed == true
   notify:
     - restart_mariadb
     - restart_apache2
