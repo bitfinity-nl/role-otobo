@@ -8,35 +8,41 @@
 #   OTOBO is the new free Open Source ticket system 
 #   with strong functionality AND a great look.
 
-- name: "Type:elasticsearch, For OS: Ubuntu 20.04LTS, Arch: amd64, State: Enabled"
-  import_tasks: traditional/ubt-2004-amd64-elasticsearch.yml
+# --- OTOBO Release 10.0 ---
+- name: "Type:elasticsearch-10.0, For OS: Ubuntu 20.04LTS, Arch: amd64, State: Enabled"
+  import_tasks: traditional/10.0/ubt-2004-amd64-elasticsearch.yml
   when:
     - otobo_install_type == 'traditional'
     - ansible_distribution_version == '20.04'
     - ansible_architecture == 'x86_64'
     #- ansible_memtotal_mb >= "7961"
 
-#- name: "Type:otobo-10.0, For OS: Ubuntu 20.04LTS, Arch: amd64, State: Enabled"
-#  import_tasks: traditional/ubt-2004-amd64-otobo.yml
+- name: "Type:otobo-10.0, For OS: Ubuntu 20.04LTS, Arch: amd64, State: Enabled"
+  import_tasks: traditional/10.0/ubt-2004-amd64-otobo.yml
+  when:
+    - otobo_install_type == 'traditional'
+    - ansible_distribution_version == '20.04'
+    - ansible_architecture == 'x86_64'
+
+- name: "Type:LDAPAD-10.0, For OS: Ubuntu 20.04LTS, Arch: amd64, State: Enabled"
+  import_tasks: traditional/10.0/ubt-2004-amd64-ldap.yml
+  when:
+    - otobo_install_type == 'traditional'
+    - ansible_distribution_version == '20.04'
+    - ansible_architecture == 'x86_64'
+    - otobo_ad_status == 'enabled'
+
+
+# --- OTOBO Release 10.1 (WIP) ---
+
+#- name: "Type:otobo-10.1, For OS: Ubuntu 20.04LTS, Arch: amd64, State: Enabled"
+#  import_tasks: traditional/10.1/ubt-2004-amd64-otobo-10-1.yml
 #  when:
 #    - otobo_install_type == 'traditional'
 #    - ansible_distribution_version == '20.04'
 #    - ansible_architecture == 'x86_64'
 
-- name: "Type:otobo-10.1, For OS: Ubuntu 20.04LTS, Arch: amd64, State: Enabled"
-  import_tasks: traditional/10.1/ubt-2004-amd64-otobo-10-1.yml
-  when:
-    - otobo_install_type == 'traditional'
-    - ansible_distribution_version == '20.04'
-    - ansible_architecture == 'x86_64'
-    
-#- name: "Type:LDAPAD, For OS: Ubuntu 20.04LTS, Arch: amd64, State: Enabled"
-#  import_tasks: traditional/ubt-2004-amd64-ldap.yml
-#  when:
-#    - otobo_install_type == 'traditional'
-#    - ansible_distribution_version == '20.04'
-#    - ansible_architecture == 'x86_64'
-#    - otobo_ad_status == 'enabled'
+# --- OTOBO Release 10.0 Docker (WIP)---
 
 - name: "Type:Docker, For OS: Ubuntu 20.04LTS, Arch: amd64, State: Enabled"
   import_tasks: docker/dock-ubt-2004-amd64-otobo.yml
