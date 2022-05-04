@@ -21,8 +21,8 @@
 #   otobo_dock_branch  : ''                                                       # Otobo Docker Git branch.
 #
 otobo_install_type  : 'traditional'
-#otobo_version       : 'otobo-latest-10.0'
-otobo_version       : 'otobo-latest-10.1'
+otobo_version       : 'otobo-latest-10.0'
+#otobo_version       : 'otobo-latest-10.1'
 otobo_download_url  : 'https://ftp.otobo.org/pub/otobo/{{ otobo_version }}.tar.gz'
 otobo_dest          : '/opt/otobo/'
 otobo_backups       : '/opt/otobo-workingdir/backups/'
