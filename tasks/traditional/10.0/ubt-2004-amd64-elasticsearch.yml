@@ -33,8 +33,8 @@
 - name: "Remove Plugins"
   raw: "{{ item }}"
   with_items:
-    -  /usr/share/elasticsearch/bin/elasticsearch-plugin install remove ingest-attachment
-    -  /usr/share/elasticsearch/bin/elasticsearch-plugin install remove analysis-icu
+    -  /usr/share/elasticsearch/bin/elasticsearch-plugin remove ingest-attachment
+    -  /usr/share/elasticsearch/bin/elasticsearch-plugin remove analysis-icu
   ignore_errors: yes
   
 - name: "Install Plugins"
