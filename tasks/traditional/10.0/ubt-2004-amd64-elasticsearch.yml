@@ -36,6 +36,9 @@
     -  /usr/share/elasticsearch/bin/elasticsearch-plugin remove ingest-attachment
     -  /usr/share/elasticsearch/bin/elasticsearch-plugin remove analysis-icu
   ignore_errors: yes
+
+- name: "Upgrade Elasticsearch"
+  raw: curl -X GET "localhost:9200/_cat/nodes?pretty"
   
 - name: "Install Plugins"
   raw: "{{ item }}"
@@ -43,6 +46,7 @@
     -  /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch ingest-attachment
     -  /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch analysis-icu
   ignore_errors: yes
+  notify: restart_elasticsearch
 
 - name: "Fix for not starting Elasticsearch"
   blockinfile:
