@@ -88,6 +88,7 @@ otobo_SSLCertificateChainFile : '/etc/letsencrypt/live/{{ otobo_ServerAlias }}/c
 #   
 otobo_sys_user : '{{ def_mariadb_user }}'
 otobo_sys_pass : '{{ def_mariadb_pass }}'
+#otobo_db_host  : '127.0.0.1'
 otobo_db_name  : 'otobo' 
 otobo_db_user  : 'otobo'
 otobo_db_pass  : 'password'
